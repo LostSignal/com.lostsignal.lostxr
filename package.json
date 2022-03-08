@@ -1,0 +1,13 @@
+{
+  "name": "com.lostsignal.lostxr",
+  "displayName": "Lost XR",
+  "version": "0.1.0",
+  "unity": "2021.1",
+  "description": "Lost XR",
+  "keywords": [
+    "Lost XR"
+  ],
+  "category": "",
+  "dependencies": {},
+  "type": "library"
+}
