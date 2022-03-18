@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   xrUtilManager: {fileID: 8854365730113241957}
-  pancakeInputSystem: {fileID: 8854365731853938407}
+  flatInputSystem: {fileID: 8854365731853938407}
   xrInputSystem: {fileID: 8854365731853938404}
 --- !u!1 &8854365731853938403
 GameObject:
@@ -178,3 +178,9 @@ MonoBehaviour:
   m_EnableXRInput: 1
   m_EnableMouseInput: 1
   m_EnableTouchInput: 1
+  m_EnableGamepadInput: 1
+  m_EnableJoystickInput: 1
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
