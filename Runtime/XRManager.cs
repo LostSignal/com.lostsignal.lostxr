@@ -23,6 +23,14 @@ namespace Lost
 
     public sealed class XRManager : MonoBehaviour // Manager<XRManager>, IOnManagersReady
     {
+        private static XRManager instance;
+
+        [EditorEvents.OnExitPlayMode]
+        private static void ResetInstance()
+        {
+            instance = null;
+        }
+
         #pragma warning disable 0649
         [SerializeField] private XRUtilManager xrUtilManager;
 
@@ -30,6 +38,9 @@ namespace Lost
         [SerializeField] private InputSystemUIInputModule flatInputSystem;
         [SerializeField] private LostXRUIInputModule xrInputSystem;
         #pragma warning restore 0649
+
+
+        public static XRManager Instance => instance;
 
         public bool IsFlatMode 
         {
@@ -78,6 +89,11 @@ namespace Lost
         ////     ManagersReady.Register(this);
         ////     #endif
         //// }
+
+        private void Awake()
+        {
+            instance = this;
+        }
 
         private void Start()
         {
