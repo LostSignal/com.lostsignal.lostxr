@@ -100,9 +100,9 @@ namespace Lost.XR
 
             HavenInteractableUtil.Setup(this, HavenLayer.Teleport);
 
-            if (this.teleportTrigger != TeleportTrigger.OnSelectEntered)
+            if (this.teleportTrigger != TeleportTrigger.OnSelectExited)
             {
-                this.teleportTrigger = TeleportTrigger.OnSelectEntered;
+                this.teleportTrigger = TeleportTrigger.OnSelectExited;
                 EditorUtil.SetDirty(this);
             }
 

@@ -17,17 +17,22 @@ namespace Lost.XR
         private static HavenRig instance;
 
         #pragma warning disable 0649
+        [Header("Settings")]
         [SerializeField] private HavenRigSettings settings = HavenRigSettings.Default;
+        [SerializeField] private float movementSpeed;
+
+        [Header("Providers")]
         [SerializeField] private HavenSnapTurnProvider snapTurnProvider;
         [SerializeField] private HavenContinuousTurnProvider continuousTurnProvider;
         [SerializeField] private HavenContinuousMoveProvider continuousMoveProvider;
         [SerializeField] private CharacterControllerDriver characterControllerDriver;
         [SerializeField] private TeleportationProvider teleportationProvider;
 
+        [Header("Hands")]
         [SerializeField] private HavenHand leftHand;
         [SerializeField] private HavenHand rightHand;
-        [SerializeField] private float movementSpeed;
-
+        
+        [Header("Transforms")]
         [SerializeField] private Transform headTransform;
         [SerializeField] private Transform leftHandTransform;
         [SerializeField] private Transform rightHandTransform;
