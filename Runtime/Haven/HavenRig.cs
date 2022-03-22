@@ -38,6 +38,12 @@ namespace Lost.XR
         [SerializeField] private Transform rightHandTransform;
         #pragma warning restore 0649
 
+        private bool isClimbingWithLeftHand;
+        private bool isClimbingWithRightHand;
+
+        private Vector3 leftHandPreviousPosition;
+        private Vector3 rightHandPreviousPosition;
+
         public static HavenRig Instance
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -106,16 +112,67 @@ namespace Lost.XR
             this.OnSettingsChanged();
         }
 
+        private void Update()
+        {
+            if (this.isClimbingWithLeftHand || this.isClimbingWithRightHand)
+            {
+                Vector3 offset = Vector3.zero;
+                int activeHands = 0;
+
+                if (this.isClimbingWithLeftHand)
+                {
+                    activeHands++;
+                    Vector3 leftHandPosition = this.leftHandTransform.position;
+                    offset += this.leftHandPreviousPosition - leftHandPosition;
+                    this.leftHandPreviousPosition = leftHandPosition;
+                }
+
+                if (this.isClimbingWithRightHand)
+                {
+                    activeHands++;
+                    Vector3 rightHandPosition = this.rightHandTransform.position;
+                    offset += this.rightHandPreviousPosition - rightHandPosition;
+                    this.rightHandPreviousPosition = rightHandPosition;
+                }
+
+                offset /= activeHands;
+
+                this.transform.localPosition += offset;
+            }
+        }
+
         public void StartClimbing(Hand hand)
         {
-            //// TODO [bgish]: Implement
-            //// Debug.Log($"StartClimbing({hand})");
+            if (hand == Hand.Left)
+            {
+                this.isClimbingWithLeftHand = true;
+                this.leftHandPreviousPosition = this.leftHand.transform.position;
+            }
+            else if (hand == Hand.Right)
+            {
+                this.isClimbingWithRightHand = true;
+                this.rightHandPreviousPosition = this.rightHand.transform.position;
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
         }
 
         public void StopClimbing(Hand hand)
         {
-            //// TODO [bgish]: Implement
-            //// Debug.Log($"StopClimbing({hand})");
+            if (hand == Hand.Left)
+            {
+                this.isClimbingWithLeftHand = false;
+            }
+            else if (hand == Hand.Right)
+            {
+                this.isClimbingWithRightHand = false;
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
         }
 
         [ExposeInEditor("Settings Changed")]
