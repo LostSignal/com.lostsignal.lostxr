@@ -17,11 +17,17 @@ namespace Lost.XR
     {
 #pragma warning disable 0649
         [SerializeField] private TeleportType type;
+
+        [ShowIf("type", TeleportType.Anchor)]
+        [Tooltip("The Transform that represents the teleportation destination.")]
+        [SerializeField] private Transform anchorTransform;
+
+        [ShowIf("type", TeleportType.Anchor)]
+        [SerializeField] private bool matchAnchorOrientation = true;
+
+        [Header("Scaling")]
         [SerializeField] private bool setScaleOnTeleport;
         [SerializeField] private float rigScale = 1.0f;
-
-        [Tooltip("The Transform that represents the teleportation destination.")]
-        [SerializeField] private Transform anchorOverrideTransform;
 #pragma warning restore 0649
 
         private System.Action<IXRInteractor, TeleportRequest> onTeleport;
@@ -38,7 +44,7 @@ namespace Lost.XR
             Anchor,
         }
 
-        private Transform AnchorOverrideTransform => this.anchorOverrideTransform != null ? this.anchorOverrideTransform : this.transform;
+        private Transform AnchorOverrideTransform => this.anchorTransform != null ? this.anchorTransform : this.transform;
 
         public void OnAwake()
         {
@@ -64,6 +70,7 @@ namespace Lost.XR
                 {
                     destinationPosition = raycastHit.point,
                     destinationRotation = this.transform.rotation,
+                    matchOrientation = MatchOrientation.WorldSpaceUp,
                 };
             }
             else if (this.type == TeleportType.Anchor)
@@ -74,6 +81,7 @@ namespace Lost.XR
                 {
                     destinationPosition = anchorOverrideTransform.position,
                     destinationRotation = anchorOverrideTransform.rotation,
+                    matchOrientation = this.matchAnchorOrientation ? MatchOrientation.TargetUpAndForward : MatchOrientation.WorldSpaceUp,
                 };
             }
             else
@@ -100,9 +108,15 @@ namespace Lost.XR
 
             HavenInteractableUtil.Setup(this, HavenLayer.Teleport);
 
-            if (this.teleportTrigger != TeleportTrigger.OnSelectExited)
+            if (this.teleportTrigger != TeleportTrigger.OnSelectEntered)
             {
-                this.teleportTrigger = TeleportTrigger.OnSelectExited;
+                this.teleportTrigger = TeleportTrigger.OnSelectEntered;
+                EditorUtil.SetDirty(this);
+            }
+
+            if (this.type == TeleportType.Anchor && this.anchorTransform == null)
+            {
+                this.anchorTransform = this.transform;
                 EditorUtil.SetDirty(this);
             }
 

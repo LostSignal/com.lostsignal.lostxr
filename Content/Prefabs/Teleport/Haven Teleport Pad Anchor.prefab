@@ -236,14 +236,15 @@ MonoBehaviour:
       m_Calls: []
   m_TeleportationProvider: {fileID: 0}
   m_MatchOrientation: 2
-  m_TeleportTrigger: 0
+  m_TeleportTrigger: 1
   m_Teleporting:
     m_PersistentCalls:
       m_Calls: []
   type: 1
+  anchorTransform: {fileID: 5974674523665034729}
+  matchAnchorOrientation: 1
   setScaleOnTeleport: 0
   rigScale: 1
-  anchorOverrideTransform: {fileID: 0}
 --- !u!1001 &6783275793930643977
 PrefabInstance:
   m_ObjectHideFlags: 0

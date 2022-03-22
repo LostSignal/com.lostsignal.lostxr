@@ -67,6 +67,7 @@ namespace Lost.XR
                 this.isActive = this.previousEnabled && this.isEnabled == false;
                 this.wasActivatedThisFrame = this.previousEnabled && this.isEnabled == false;
                 this.wasDeactivatedThisFrame = false;
+
                 this.previousEnabled = this.isEnabled;
             }
 

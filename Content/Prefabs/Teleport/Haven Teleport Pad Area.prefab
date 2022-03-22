@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7527364250851889512}
   - component: {fileID: 819847097327305450}
   - component: {fileID: 6022886593690440037}
-  m_Layer: 6
+  m_Layer: 31
   m_Name: Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9184774687367631719}
-  m_Layer: 6
+  m_Layer: 31
   m_Name: Highlight Fence
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -143,7 +143,7 @@ GameObject:
   - component: {fileID: 1066709015839391079}
   - component: {fileID: 8329038683342571345}
   - component: {fileID: 2353757419115707304}
-  m_Layer: 6
+  m_Layer: 31
   m_Name: fileAnchorWall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -226,7 +226,7 @@ GameObject:
   - component: {fileID: 8727270115177473472}
   - component: {fileID: 308069213766295542}
   - component: {fileID: 6303616959784018703}
-  m_Layer: 6
+  m_Layer: 31
   m_Name: fileAnchorWall (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -309,7 +309,7 @@ GameObject:
   - component: {fileID: 7434323654138738202}
   - component: {fileID: 1906996568829332524}
   - component: {fileID: 5281466917595246805}
-  m_Layer: 6
+  m_Layer: 31
   m_Name: fileAnchorWall (0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -392,7 +392,7 @@ GameObject:
   - component: {fileID: 7664456574684724204}
   - component: {fileID: 1659180752798106074}
   - component: {fileID: 4916261123754933539}
-  m_Layer: 6
+  m_Layer: 31
   m_Name: fileAnchorWall (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -474,7 +474,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5974674523665034729}
   - component: {fileID: 5562160032815521190}
-  m_Layer: 6
+  m_Layer: 31
   m_Name: Haven Teleport Pad Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -603,7 +603,7 @@ MonoBehaviour:
       m_Calls: []
   m_TeleportationProvider: {fileID: 0}
   m_MatchOrientation: 0
-  m_TeleportTrigger: 0
+  m_TeleportTrigger: 1
   m_Teleporting:
     m_PersistentCalls:
       m_Calls: []
