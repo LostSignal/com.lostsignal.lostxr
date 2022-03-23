@@ -13,10 +13,15 @@ namespace Lost.XR
     {
         private static readonly Vector2 Zero = new Vector2(0.0f, 0.0f);
 
+        #pragma warning disable 0649
+        [SerializeField] private float debounceTime;
+        [SerializeField] private bool enableTurnAround;
+        #pragma warning restore 0649
+
+        private float lastTurnTime;
         private HavenHand turnHand;
         private bool isLeftHand;
-        private bool enableTurnAround;
-
+        
         public void UpdateSettings(HavenRigSettings settings, HavenHand leftHand, HavenHand rightHand)
         {
             this.enabled = settings.TurnType == TurnType.Continuous;
@@ -41,7 +46,13 @@ namespace Lost.XR
             // Special case for turn around
             if (this.enableTurnAround && input.y < -0.9f)
             {
-                return 180;
+                float currentTime = Time.realtimeSinceStartup;
+
+                if (currentTime > this.lastTurnTime + this.debounceTime)
+                {
+                    this.lastTurnTime = currentTime;
+                    return 180;
+                }
             }
 
             return base.GetTurnAmount(input);

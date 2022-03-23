@@ -14,6 +14,8 @@ namespace Lost.XR
 
     public class HavenRig : MonoBehaviour
     {
+        private static readonly Vector3 Zero = new Vector3(0.0f, 0.0f, 0.0f);
+
         private static HavenRig instance;
 
         #pragma warning disable 0649
@@ -27,6 +29,7 @@ namespace Lost.XR
         [SerializeField] private HavenContinuousMoveProvider continuousMoveProvider;
         [SerializeField] private CharacterControllerDriver characterControllerDriver;
         [SerializeField] private TeleportationProvider teleportationProvider;
+        [SerializeField] private CharacterController characterController;
 
         [Header("Hands")]
         [SerializeField] private HavenHand leftHand;
@@ -114,9 +117,24 @@ namespace Lost.XR
 
         private void Update()
         {
+            this.UpdateClimbing();
+        }
+
+        #if UNITY_EDITOR
+        private void OnValidate()
+        {
+            if (Application.isPlaying)
+            {
+                this.OnSettingsChanged();
+            }
+        }
+        #endif
+
+        private void UpdateClimbing()
+        {
             if (this.isClimbingWithLeftHand || this.isClimbingWithRightHand)
             {
-                Vector3 offset = Vector3.zero;
+                Vector3 offset = Zero;
                 int activeHands = 0;
 
                 if (this.isClimbingWithLeftHand)
@@ -135,9 +153,12 @@ namespace Lost.XR
                     this.rightHandPreviousPosition = rightHandPosition;
                 }
 
+                // NOTE [bgish]: Not sure if averaging is the best route if you have multiple hands climbing at once, test and find out
                 offset /= activeHands;
 
-                this.transform.localPosition += offset;
+                this.characterController.Move(offset);
+                this.leftHandPreviousPosition += offset;
+                this.rightHandPreviousPosition += offset;
             }
         }
 
@@ -146,17 +167,22 @@ namespace Lost.XR
             if (hand == Hand.Left)
             {
                 this.isClimbingWithLeftHand = true;
-                this.leftHandPreviousPosition = this.leftHand.transform.position;
+                this.leftHandPreviousPosition = this.leftHandTransform.position;
             }
             else if (hand == Hand.Right)
             {
                 this.isClimbingWithRightHand = true;
-                this.rightHandPreviousPosition = this.rightHand.transform.position;
+                this.rightHandPreviousPosition = this.rightHandTransform.position;
             }
             else
             {
                 throw new NotImplementedException();
             }
+
+            // Disable all other movement when in climbing mode
+            this.continuousMoveProvider.enabled = false;
+            this.continuousTurnProvider.enabled = false;
+            this.snapTurnProvider.enabled = false;
         }
 
         public void StopClimbing(Hand hand)
@@ -173,6 +199,11 @@ namespace Lost.XR
             {
                 throw new NotImplementedException();
             }
+
+            if (this.isClimbingWithLeftHand == false && this.isClimbingWithRightHand == false)
+            {
+                this.UpdateProviderSettings(this.GetSettings());
+            }
         }
 
         [ExposeInEditor("Settings Changed")]
@@ -181,14 +212,7 @@ namespace Lost.XR
             var settings = this.GetSettings();
 
             // Updating settings for all providers
-            this.snapTurnProvider.UpdateSettings(settings, this.leftHand, this.rightHand);
-            this.continuousTurnProvider.UpdateSettings(settings, this.leftHand, this.rightHand);
-            this.continuousMoveProvider.UpdateSettings(
-                settings,
-                this.movementSpeed,
-                this.headTransform,
-                this.leftHand,
-                this.rightHand);
+            this.UpdateProviderSettings(settings);
 
             // Enabling / Disabling Teleport and Turn Around
             if (settings.MovementMode == MovementMode.ContinuousOnly)
@@ -210,6 +234,20 @@ namespace Lost.XR
             {
                 throw new NotImplementedException();
             }
+        }
+
+        private void UpdateProviderSettings(HavenRigSettings settings)
+        {
+            this.snapTurnProvider.UpdateSettings(settings, this.leftHand, this.rightHand);
+
+            this.continuousTurnProvider.UpdateSettings(settings, this.leftHand, this.rightHand);
+
+            this.continuousMoveProvider.UpdateSettings(
+                settings,
+                this.movementSpeed,
+                this.headTransform,
+                this.leftHand,
+                this.rightHand);
         }
 
         private HavenRigSettings GetSettings()

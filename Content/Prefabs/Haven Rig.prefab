@@ -3317,14 +3317,15 @@ MonoBehaviour:
     TurnHand: 1
     ContinuousTurnSpeed: 180
     SnapTurnAmmount: 30
+  movementSpeed: 3
   snapTurnProvider: {fileID: 5866682921737778906}
   continuousTurnProvider: {fileID: 3719980593775908319}
   continuousMoveProvider: {fileID: 223687780685587782}
   characterControllerDriver: {fileID: 6232745470614056095}
   teleportationProvider: {fileID: 6232745470614056087}
+  characterController: {fileID: 6232745470614056090}
   leftHand: {fileID: 1885851326}
   rightHand: {fileID: 7508100001957807611}
-  movementSpeed: 3
   headTransform: {fileID: 1767192434}
   leftHandTransform: {fileID: 1885851325}
   rightHandTransform: {fileID: 502342291}
@@ -3375,7 +3376,7 @@ MonoBehaviour:
   m_MoveSpeed: 1
   m_EnableStrafe: 1
   m_UseGravity: 1
-  m_GravityApplicationMode: 0
+  m_GravityApplicationMode: 1
   m_ForwardSource: {fileID: 0}
 --- !u!114 &2300872734361851953
 MonoBehaviour:
