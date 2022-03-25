@@ -3307,16 +3307,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7948c4e225089ee4db2384c7c80e54e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settings:
-    MovementMode: 2
-    TurnType: 1
-    EnableTurnAround: 0
-    MovementHand: 0
-    MovementSource: 0
-    AllowStrafe: 1
-    TurnHand: 1
-    ContinuousTurnSpeed: 180
-    SnapTurnAmmount: 30
+  height: {fileID: 11400000, guid: 6d4690138d75c1f4cb0138fd6d99419d, type: 2}
+  eyeHeight: {fileID: 11400000, guid: 5f5a6350ed1278c4eaf69f74ba6ab922, type: 2}
+  sitStand: {fileID: 11400000, guid: 303b64bf2f55ae041ad0d69d522bc9ad, type: 2}
+  movementMode: {fileID: 11400000, guid: 347c777109a0dcb4aaff3061667ff62f, type: 2}
+  comfortMode: {fileID: 11400000, guid: b952cd2d59a6e084a993a5e461fad322, type: 2}
+  enableStrafe: {fileID: 11400000, guid: 32b83c39751296848958f056e311524a, type: 2}
+  movementHand: {fileID: 11400000, guid: 2377401b2cfdb2e4388a97a28acfcc71, type: 2}
+  movementSource: {fileID: 11400000, guid: 45781f5a618cff643b0ef6ad61843888, type: 2}
+  turnMode: {fileID: 11400000, guid: 66f90ad65c0872f46ab1891aad3a2204, type: 2}
+  allowTurnAround: {fileID: 11400000, guid: c78ac8cad89940144934abe40d13d20d, type: 2}
+  snapTurnDegrees: {fileID: 11400000, guid: ceda180ab5d60a74094968d595e1c016, type: 2}
+  continuousTurnSpeed: {fileID: 11400000, guid: 272732db93942834fa414f79e9e08312, type: 2}
   movementSpeed: 3
   snapTurnProvider: {fileID: 5866682921737778906}
   continuousTurnProvider: {fileID: 3719980593775908319}
@@ -3360,6 +3362,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_System: {fileID: 6232745470614056086}
   m_TurnSpeed: 60
+  debounceTime: 0
+  enableTurnAround: 0
 --- !u!114 &223687780685587782
 MonoBehaviour:
   m_ObjectHideFlags: 0

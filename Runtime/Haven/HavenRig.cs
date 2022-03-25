@@ -18,9 +18,10 @@ namespace Lost.XR
 
         private static HavenRig instance;
 
-        #pragma warning disable 0649
+#pragma warning disable 0649
         [Header("Settings")]
         [SerializeField] private FloatSetting height;
+        [SerializeField] private FloatSetting eyeHeight;
         [SerializeField] private IntSetting sitStand;
         [SerializeField] private IntSetting movementMode;
         [SerializeField] private IntSetting comfortMode;
@@ -46,12 +47,12 @@ namespace Lost.XR
         [Header("Hands")]
         [SerializeField] private HavenHand leftHand;
         [SerializeField] private HavenHand rightHand;
-        
+
         [Header("Transforms")]
         [SerializeField] private Transform headTransform;
         [SerializeField] private Transform leftHandTransform;
         [SerializeField] private Transform rightHandTransform;
-        #pragma warning restore 0649
+#pragma warning restore 0649
 
         private bool isClimbingWithLeftHand;
         private bool isClimbingWithRightHand;
@@ -119,22 +120,41 @@ namespace Lost.XR
 
             instance = this;
             this.OnSettingsChanged();
+
+            this.height.OnSettingChanged += this.OnSettingsChanged;
+            this.eyeHeight.OnSettingChanged += this.OnSettingsChanged;
+            this.sitStand.OnSettingChanged += this.OnSettingsChanged;
+            this.movementMode.OnSettingChanged += this.OnSettingsChanged;
+            this.comfortMode.OnSettingChanged += this.OnSettingsChanged;
+            this.enableStrafe.OnSettingChanged += this.OnSettingsChanged;
+            this.movementHand.OnSettingChanged += this.OnSettingsChanged;
+            this.movementSource.OnSettingChanged += this.OnSettingsChanged;
+            this.turnMode.OnSettingChanged += this.OnSettingsChanged;
+            this.allowTurnAround.OnSettingChanged += this.OnSettingsChanged;
+            this.snapTurnDegrees.OnSettingChanged += this.OnSettingsChanged;
+            this.continuousTurnSpeed.OnSettingChanged += this.OnSettingsChanged;
+        }
+
+        private void OnDestroy()
+        {
+            this.height.OnSettingChanged -= this.OnSettingsChanged;
+            this.eyeHeight.OnSettingChanged -= this.OnSettingsChanged;
+            this.sitStand.OnSettingChanged -= this.OnSettingsChanged;
+            this.movementMode.OnSettingChanged -= this.OnSettingsChanged;
+            this.comfortMode.OnSettingChanged -= this.OnSettingsChanged;
+            this.enableStrafe.OnSettingChanged -= this.OnSettingsChanged;
+            this.movementHand.OnSettingChanged -= this.OnSettingsChanged;
+            this.movementSource.OnSettingChanged -= this.OnSettingsChanged;
+            this.turnMode.OnSettingChanged -= this.OnSettingsChanged;
+            this.allowTurnAround.OnSettingChanged -= this.OnSettingsChanged;
+            this.snapTurnDegrees.OnSettingChanged -= this.OnSettingsChanged;
+            this.continuousTurnSpeed.OnSettingChanged -= this.OnSettingsChanged;
         }
 
         private void Update()
         {
             this.UpdateClimbing();
         }
-
-        #if UNITY_EDITOR
-        private void OnValidate()
-        {
-            if (Application.isPlaying)
-            {
-                this.OnSettingsChanged();
-            }
-        }
-        #endif
 
         private void UpdateClimbing()
         {
@@ -258,34 +278,23 @@ namespace Lost.XR
 
         private HavenRigSettings GetSettings()
         {
-            //// [SerializeField] private FloatSetting height;
-            //// [SerializeField] private IntSetting sitStand;
-            //// [SerializeField] private IntSetting movementMode;
-            //// [SerializeField] private IntSetting comfortMode;
-            //// 
-            //// [SerializeField] private BoolSetting enableStrafe;
-            //// [SerializeField] private IntSetting movementHand;
-            //// [SerializeField] private IntSetting movementSource;
-            //// 
-            //// [SerializeField] private IntSetting turnMode;
-            //// [SerializeField] private BoolSetting allowTurnAround;
-            //// [SerializeField] private FloatSetting snapTurnDegrees;
-            //// [SerializeField] private FloatSetting continuousTurnSpeed;
-
             return new HavenRigSettings
             {
                 // General
-                MovementMode = this.movementMode.Value == 0 ? MovementMode.ContinuousAndTeleport :
-                               this.movementMode.Value == 1 ? MovementMode.ContinuousOnly : MovementMode.TeleportOnly,
-                
+                MovementMode = this.movementMode.Value == (int)MovementMode.ContinuousAndTeleport ? MovementMode.ContinuousAndTeleport :
+                               this.movementMode.Value == (int)MovementMode.ContinuousOnly ? MovementMode.ContinuousOnly : MovementMode.TeleportOnly,
+
                 // Movement
                 AllowStrafe = this.enableStrafe.Value,
-                MovementHand = this.movementHand.Value == 0 ? Hand.Left : Hand.Right,
-                MovementSource = this.movementSource.Value == 0 ? ContinuousMovementSource.Head :
-                                 this.movementSource.Value == 1 ? ContinuousMovementSource.LeftHand : ContinuousMovementSource.RightHand,
+
+                MovementHand = this.movementHand.Value == (int)Hand.Left ? Hand.Left : Hand.Right,
+
+                MovementSource = this.movementSource.Value == (int)ContinuousMovementSource.Head ? ContinuousMovementSource.Head :
+                                 this.movementSource.Value == (int)ContinuousMovementSource.LeftHand ? ContinuousMovementSource.LeftHand :
+                                 ContinuousMovementSource.RightHand,
 
                 // Turning
-                TurnMode = this.turnMode.Value == 0 ? TurnMode.Continuous : TurnMode.Snap,
+                TurnMode = this.turnMode.Value == (int)TurnMode.Continuous ? TurnMode.Continuous : TurnMode.Snap,
                 ContinuousTurnSpeed = this.continuousTurnSpeed.Value,
                 SnapTurnAmmount = this.snapTurnDegrees.Value,
                 EnableTurnAround = this.allowTurnAround.Value,

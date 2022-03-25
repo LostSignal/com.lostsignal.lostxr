@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3eb606ebbe981fb4d8f7bb246d64b5a7, type: 3}
-  m_Name: Snap Degrees
+  m_Name: Continuous Turn Speed
   m_EditorClassIdentifier: 
   dataStore: {fileID: 11400000, guid: 370ec116f1b8be640abbd8484f8662a8, type: 2}
-  id: 1688127670
-  defaultValue: 30
-  minValue: 15
-  maxValue: 45
+  id: 215422854
+  defaultValue: 180
+  minValue: 10
+  maxValue: 360
