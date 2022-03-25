@@ -16,12 +16,12 @@ namespace Lost.XR
 
     public enum MovementMode
     {
-        TeleportOnly,
-        ContinuousOnly,
         ContinuousAndTeleport,
+        ContinuousOnly,
+        TeleportOnly,
     }
 
-    public enum TurnType
+    public enum TurnMode
     {
         Continuous,
         Snap,
@@ -34,26 +34,33 @@ namespace Lost.XR
         RightHand,
     }
 
+    public enum ComfortMode
+    {
+        Comfortable,
+        Moderate,
+        Intense,
+        Custom,
+    }
+
     [Serializable]
     public struct HavenRigSettings
     {
         public static readonly HavenRigSettings Default = new HavenRigSettings
         {
             MovementMode = MovementMode.ContinuousAndTeleport,
-            TurnType = TurnType.Snap,
+            TurnMode = TurnMode.Snap,
             EnableTurnAround = false,
 
             MovementHand = Hand.Left,
             MovementSource = ContinuousMovementSource.Head,
             AllowStrafe = true,
 
-            TurnHand = Hand.Right,
             ContinuousTurnSpeed = 180f,
             SnapTurnAmmount = 30.0f,
         };
 
         public MovementMode MovementMode;
-        public TurnType TurnType;
+        public TurnMode TurnMode;
         public bool EnableTurnAround;
 
         // Continuous Movement
@@ -62,7 +69,6 @@ namespace Lost.XR
         public bool AllowStrafe;
 
         // Turning Options
-        public Hand TurnHand;
         public float ContinuousTurnSpeed;
         public float SnapTurnAmmount;
     }

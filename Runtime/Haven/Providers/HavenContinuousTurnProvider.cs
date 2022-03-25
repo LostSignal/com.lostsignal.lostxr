@@ -24,9 +24,9 @@ namespace Lost.XR
         
         public void UpdateSettings(HavenRigSettings settings, HavenHand leftHand, HavenHand rightHand)
         {
-            this.enabled = settings.TurnType == TurnType.Continuous;
+            this.enabled = settings.TurnMode == TurnMode.Continuous;
             this.turnSpeed = settings.ContinuousTurnSpeed;
-            this.isLeftHand = settings.TurnHand == Hand.Left;
+            this.isLeftHand = settings.MovementHand != Hand.Left;
             this.turnHand = this.isLeftHand ? leftHand : rightHand;
             this.enableTurnAround = settings.EnableTurnAround;
         }

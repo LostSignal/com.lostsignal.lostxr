@@ -20,7 +20,19 @@ namespace Lost.XR
 
         #pragma warning disable 0649
         [Header("Settings")]
-        [SerializeField] private HavenRigSettings settings = HavenRigSettings.Default;
+        [SerializeField] private FloatSetting height;
+        [SerializeField] private IntSetting sitStand;
+        [SerializeField] private IntSetting movementMode;
+        [SerializeField] private IntSetting comfortMode;
+
+        [SerializeField] private BoolSetting enableStrafe;
+        [SerializeField] private IntSetting movementHand;
+        [SerializeField] private IntSetting movementSource;
+
+        [SerializeField] private IntSetting turnMode;
+        [SerializeField] private BoolSetting allowTurnAround;
+        [SerializeField] private FloatSetting snapTurnDegrees;
+        [SerializeField] private FloatSetting continuousTurnSpeed;
         [SerializeField] private float movementSpeed;
 
         [Header("Providers")]
@@ -57,12 +69,6 @@ namespace Lost.XR
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get => 1.0f;
-        }
-
-        public HavenRigSettings Settings
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => this.settings;
         }
 
         public TeleportationProvider TeleportationProvider
@@ -252,8 +258,38 @@ namespace Lost.XR
 
         private HavenRigSettings GetSettings()
         {
-            // TODO [bgish]: Read in settings from DataStore
-            return this.settings;
+            //// [SerializeField] private FloatSetting height;
+            //// [SerializeField] private IntSetting sitStand;
+            //// [SerializeField] private IntSetting movementMode;
+            //// [SerializeField] private IntSetting comfortMode;
+            //// 
+            //// [SerializeField] private BoolSetting enableStrafe;
+            //// [SerializeField] private IntSetting movementHand;
+            //// [SerializeField] private IntSetting movementSource;
+            //// 
+            //// [SerializeField] private IntSetting turnMode;
+            //// [SerializeField] private BoolSetting allowTurnAround;
+            //// [SerializeField] private FloatSetting snapTurnDegrees;
+            //// [SerializeField] private FloatSetting continuousTurnSpeed;
+
+            return new HavenRigSettings
+            {
+                // General
+                MovementMode = this.movementMode.Value == 0 ? MovementMode.ContinuousAndTeleport :
+                               this.movementMode.Value == 1 ? MovementMode.ContinuousOnly : MovementMode.TeleportOnly,
+                
+                // Movement
+                AllowStrafe = this.enableStrafe.Value,
+                MovementHand = this.movementHand.Value == 0 ? Hand.Left : Hand.Right,
+                MovementSource = this.movementSource.Value == 0 ? ContinuousMovementSource.Head :
+                                 this.movementSource.Value == 1 ? ContinuousMovementSource.LeftHand : ContinuousMovementSource.RightHand,
+
+                // Turning
+                TurnMode = this.turnMode.Value == 0 ? TurnMode.Continuous : TurnMode.Snap,
+                ContinuousTurnSpeed = this.continuousTurnSpeed.Value,
+                SnapTurnAmmount = this.snapTurnDegrees.Value,
+                EnableTurnAround = this.allowTurnAround.Value,
+            };
         }
     }
 }
