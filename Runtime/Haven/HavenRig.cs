@@ -232,6 +232,66 @@ namespace Lost.XR
             }
         }
 
+        public void CalibrateByHeight()
+        {
+            CoroutineRunner.Instance.StartCoroutine(Coroutine());
+
+            IEnumerator Coroutine()
+            {
+                var controllersState = XRControllersState.Instance;
+
+                while (true)
+                {
+                    controllersState.UpdateValues();
+
+                    float cameraHeight = Camera.main.transform.position.y;
+
+                    this.eyeHeight.Value = cameraHeight;
+                    this.height.Value = cameraHeight + 0.1143f;
+
+                    if (controllersState.IsAnyButtonDown())
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        yield return null;
+                    }
+                }
+            }
+        }
+
+        public void CalibrateByArmSpan()
+        {
+            CoroutineRunner.Instance.StartCoroutine(Coroutine());
+
+            IEnumerator Coroutine()
+            {
+                var controllersState = XRControllersState.Instance;
+
+                while (true)
+                {
+                    controllersState.UpdateValues();
+
+                    float armSpan = Vector3.Distance(controllersState.LeftPosition, controllersState.RightPosition);
+                    float estimatedHeight = armSpan + 0.21336f;
+                    float eyeHeight = armSpan + .09906f;
+
+                    this.eyeHeight.Value = eyeHeight;
+                    this.height.Value = estimatedHeight;
+
+                    if (controllersState.IsAnyButtonDown())
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        yield return null;
+                    }
+                }
+            }
+        }
+
         [ExposeInEditor("Settings Changed")]
         private void OnSettingsChanged()
         {
