@@ -9,7 +9,9 @@ namespace Lost.XR
     using System;
     using System.Collections;
     using System.Runtime.CompilerServices;
+    using Unity.XR.CoreUtils;
     using UnityEngine;
+    using UnityEngine.XR;
     using UnityEngine.XR.Interaction.Toolkit;
 
     public class HavenRig : MonoBehaviour
@@ -52,6 +54,10 @@ namespace Lost.XR
         [SerializeField] private Transform headTransform;
         [SerializeField] private Transform leftHandTransform;
         [SerializeField] private Transform rightHandTransform;
+
+        [Header("XR")]
+        [SerializeField] private XROrigin xrOrigin;
+        [SerializeField] private XRUtilManager xrUtilManager;
 #pragma warning restore 0649
 
         private bool isClimbingWithLeftHand;
@@ -59,6 +65,15 @@ namespace Lost.XR
 
         private Vector3 leftHandPreviousPosition;
         private Vector3 rightHandPreviousPosition;
+
+        private SitState currentSitStandState;
+
+        private enum SitState
+        {
+            Uninitialized,
+            Sit,
+            Stand
+        }
 
         public static HavenRig Instance
         {
@@ -119,7 +134,6 @@ namespace Lost.XR
             }
 
             instance = this;
-            this.OnSettingsChanged();
 
             this.height.OnSettingChanged += this.OnSettingsChanged;
             this.eyeHeight.OnSettingChanged += this.OnSettingsChanged;
@@ -133,6 +147,11 @@ namespace Lost.XR
             this.allowTurnAround.OnSettingChanged += this.OnSettingsChanged;
             this.snapTurnDegrees.OnSettingChanged += this.OnSettingsChanged;
             this.continuousTurnSpeed.OnSettingChanged += this.OnSettingsChanged;
+
+            this.xrUtilManager.OnXRDeviceChange += this.InitialSitStandUpdate;
+
+            this.OnSettingsChanged();
+            this.InitialSitStandUpdate();
         }
 
         private void OnDestroy()
@@ -149,6 +168,8 @@ namespace Lost.XR
             this.allowTurnAround.OnSettingChanged -= this.OnSettingsChanged;
             this.snapTurnDegrees.OnSettingChanged -= this.OnSettingsChanged;
             this.continuousTurnSpeed.OnSettingChanged -= this.OnSettingsChanged;
+
+            this.xrUtilManager.OnXRDeviceChange -= this.InitialSitStandUpdate;
         }
 
         private void Update()
@@ -292,7 +313,53 @@ namespace Lost.XR
             }
         }
 
-        [ExposeInEditor("Settings Changed")]
+        private void UpdateSitStand(bool forceUpdate = false)
+        {
+            SitState settingsSitState = sitStand.Value == 0 ? SitState.Sit : SitState.Stand;
+
+            if (this.currentSitStandState == settingsSitState && forceUpdate == false)
+            {
+                return;
+            }
+
+            this.currentSitStandState = settingsSitState;
+
+            if (this.xrOrigin.CurrentTrackingOriginMode == TrackingOriginModeFlags.Device)
+            {
+                this.xrOrigin.CameraYOffset = this.eyeHeight.Value;
+            }
+            else if (this.xrOrigin.CurrentTrackingOriginMode == TrackingOriginModeFlags.Floor)
+            {
+                this.xrOrigin.CameraYOffset = 0.0f;
+
+                float offset = settingsSitState == SitState.Sit ?
+                    this.eyeHeight.Value - this.headTransform.localPosition.y :
+                    0.0f;
+
+                var offsetObjectTransform = this.xrOrigin.CameraFloorOffsetObject.transform;
+                offsetObjectTransform.localPosition = offsetObjectTransform.localPosition.SetY(offset);
+            }
+        }
+
+        private void InitialSitStandUpdate()
+        {
+            CoroutineRunner.Instance.StartCoroutine(Coroutine());
+
+            IEnumerator Coroutine()
+            {
+                float currentY = this.headTransform.localPosition.y;
+
+                while (currentY < 0.5f)
+                {
+                    yield return null;
+
+                    currentY = this.headTransform.localPosition.y;
+                }
+
+                this.UpdateSitStand(true);
+            }
+        }
+
         private void OnSettingsChanged()
         {
             var settings = this.GetSettings();
@@ -319,6 +386,11 @@ namespace Lost.XR
             else
             {
                 throw new NotImplementedException();
+            }
+
+            if (this.currentSitStandState != SitState.Uninitialized)
+            {
+                this.UpdateSitStand();
             }
         }
 
