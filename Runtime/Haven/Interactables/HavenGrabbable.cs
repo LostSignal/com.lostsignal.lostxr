@@ -1,4 +1,4 @@
-﻿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="HavenOffsetGrabbable.cs" company="Lost Signal LLC">
 //     Copyright (c) Lost Signal LLC. All rights reserved.
 // </copyright>
@@ -56,7 +56,7 @@ namespace Lost.Haven
 
         public override bool IsSelectableBy(IXRSelectInteractor interactor)
         {
-            return base.IsSelectableBy(interactor) && 
+            return base.IsSelectableBy(interactor) &&
                 (this.interactionLayers.value & interactor.interactionLayers.value) != 0;
         }
 

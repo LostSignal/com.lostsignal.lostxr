@@ -12,17 +12,25 @@ namespace Lost.XR
 
     public sealed class HavenGrabController : XRController
     {
-        #pragma warning disable 0649
+#pragma warning disable 0649
         [SerializeField] private XRBaseControllerInteractor interactor;
-        #pragma warning restore 0649
+#pragma warning restore 0649
 
-        private bool isPressed = false;
-        private bool previousIsPressed = false;
+        private bool isGrabPressed = false;
+        private bool previousIsGrabPressed = false;
+
+        private bool isActivatePressed = false;
+        private bool previousIsActivatePressed = false;
 
         private int lastCalculatedFrame;
-        private bool isActive;
-        private bool wasActivatedThisFrame;
-        private bool wasDeactivatedThisFrame;
+        private bool isGrabActive;
+        private bool isActivateActive;
+
+        private bool wasGrabActivatedThisFrame;
+        private bool wasGrabDeactivatedThisFrame;
+
+        private bool wasActivateActivatedThisFrame;
+        private bool wasActivateDeactivatedThisFrame;
 
         public bool HasSelection
         {
@@ -60,13 +68,25 @@ namespace Lost.XR
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void StartGrab()
         {
-            this.isPressed = true;
+            this.isGrabPressed = true;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void EndGrab()
         {
-            this.isPressed = false;
+            this.isGrabPressed = false;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void StartActivate()
+        {
+            this.isActivatePressed = true;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void EndActivate()
+        {
+            this.isActivatePressed = false;
         }
 
         protected override void ApplyControllerState(XRInteractionUpdateOrder.UpdatePhase updatePhase, XRControllerState controllerState)
@@ -82,15 +102,26 @@ namespace Lost.XR
             {
                 this.lastCalculatedFrame = currentFrame;
 
-                this.isActive = this.isPressed;
-                this.wasActivatedThisFrame = this.previousIsPressed == false && this.isPressed;
-                this.wasDeactivatedThisFrame = this.previousIsPressed && this.isPressed == false;
-                this.previousIsPressed = this.isPressed;
+                // Grabbing
+                this.isGrabActive = this.isGrabPressed;
+                this.wasGrabActivatedThisFrame = this.previousIsGrabPressed == false && this.isGrabPressed;
+                this.wasGrabDeactivatedThisFrame = this.previousIsGrabPressed && this.isGrabPressed == false;
+                this.previousIsGrabPressed = this.isGrabPressed;
+
+                // Activating
+                this.isActivateActive = this.isActivatePressed;
+                this.wasActivateActivatedThisFrame = this.previousIsActivatePressed == false && this.isActivatePressed;
+                this.wasActivateDeactivatedThisFrame = this.previousIsActivatePressed && this.isActivatePressed == false;
+                this.previousIsActivatePressed = this.isActivatePressed;
             }
 
-            controllerState.selectInteractionState.active = this.isActive;
-            controllerState.selectInteractionState.activatedThisFrame = this.wasActivatedThisFrame;
-            controllerState.selectInteractionState.deactivatedThisFrame = this.wasDeactivatedThisFrame;
+            controllerState.selectInteractionState.active = this.isGrabActive;
+            controllerState.selectInteractionState.activatedThisFrame = this.wasGrabActivatedThisFrame;
+            controllerState.selectInteractionState.deactivatedThisFrame = this.wasGrabDeactivatedThisFrame;
+
+            controllerState.activateInteractionState.active = this.isActivateActive;
+            controllerState.activateInteractionState.activatedThisFrame = this.wasActivateActivatedThisFrame;
+            controllerState.activateInteractionState.deactivatedThisFrame = this.wasActivateDeactivatedThisFrame;
 
             base.ApplyControllerState(updatePhase, controllerState);
         }

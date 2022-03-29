@@ -11,7 +11,7 @@ namespace Lost.XR
 
     public class HavenHand : MonoBehaviour
     {
-        #pragma warning disable 0649
+#pragma warning disable 0649
         [SerializeField] private Hand hand;
         [SerializeField] private HavenRig havenRig;
         [SerializeField] private HavenGrabController directGrab;
@@ -22,7 +22,7 @@ namespace Lost.XR
         [SerializeField] private Vector3 postitionOffset;
         [SerializeField] private Quaternion rotationOffset;
         [SerializeField] private Mode debugMode;
-        #pragma warning restore 0649
+#pragma warning restore 0649
 
         private float previousTrigger;
         private float previousGrip;
@@ -181,6 +181,31 @@ namespace Lost.XR
             {
                 this.directGrab.EndGrab();
                 this.rayGrab.EndGrab();
+            }
+
+            // Calculating Activation
+            if (this.directGrab.HasSelection)
+            {
+                if (trigger > 0.05f)
+                {
+                    this.directGrab.StartActivate();
+                }
+                else
+                {
+                    this.directGrab.EndActivate();
+                }
+            }
+
+            if (this.rayGrab.HasSelection)
+            {
+                if (trigger > 0.05f)
+                {
+                    this.rayGrab.StartActivate();
+                }
+                else
+                {
+                    this.rayGrab.EndActivate();
+                }
             }
 
             this.previousGrip = currentGrip;
