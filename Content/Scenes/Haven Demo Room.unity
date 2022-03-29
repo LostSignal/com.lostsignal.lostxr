@@ -11125,6 +11125,7 @@ GameObject:
   - component: {fileID: 1597068142}
   - component: {fileID: 1597068141}
   - component: {fileID: 1597068148}
+  - component: {fileID: 1597068149}
   m_Layer: 30
   m_Name: Hammer
   m_TagString: Untagged
@@ -11281,7 +11282,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_InteractionLayers:
-    m_Bits: 1
+    m_Bits: 4294967295
   m_SelectMode: 0
   m_CustomReticle: {fileID: 0}
   m_FirstHoverEntered:
@@ -11398,6 +11399,24 @@ MonoBehaviour:
   onUseStop:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1597068149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1597068138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40f5715e80f079b4e870d0be59c6ecea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  socketType: 
+  socketedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  disableSocketOnSocketed: 0
+  interactable: {fileID: 1597068148}
 --- !u!1 &1600129456
 GameObject:
   m_ObjectHideFlags: 0
@@ -14248,6 +14267,7 @@ GameObject:
   - component: {fileID: 2051076273}
   - component: {fileID: 2051076272}
   - component: {fileID: 2051076280}
+  - component: {fileID: 2051076281}
   m_Layer: 30
   m_Name: Safety Hat
   m_TagString: Untagged
@@ -14420,7 +14440,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_InteractionLayers:
-    m_Bits: 1
+    m_Bits: 4294967295
   m_SelectMode: 0
   m_CustomReticle: {fileID: 0}
   m_FirstHoverEntered:
@@ -14537,6 +14557,24 @@ MonoBehaviour:
   onUseStop:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2051076281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2051076269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40f5715e80f079b4e870d0be59c6ecea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  socketType: 
+  socketedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  disableSocketOnSocketed: 0
+  interactable: {fileID: 2051076280}
 --- !u!1 &2052982456 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8004894762301884747, guid: b0f3684e0ff5fc846aebe8796897c30b, type: 3}
@@ -15028,6 +15066,7 @@ GameObject:
   - component: {fileID: 2095128156}
   - component: {fileID: 2095128155}
   - component: {fileID: 2095128162}
+  - component: {fileID: 2095128163}
   m_Layer: 30
   m_Name: Jigsaw
   m_TagString: Untagged
@@ -15185,7 +15224,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_InteractionLayers:
-    m_Bits: 1
+    m_Bits: 4294967295
   m_SelectMode: 0
   m_CustomReticle: {fileID: 0}
   m_FirstHoverEntered:
@@ -15302,6 +15341,24 @@ MonoBehaviour:
   onUseStop:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2095128163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2095128152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40f5715e80f079b4e870d0be59c6ecea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  socketType: 
+  socketedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  disableSocketOnSocketed: 0
+  interactable: {fileID: 2095128162}
 --- !u!1 &2101941049
 GameObject:
   m_ObjectHideFlags: 0
