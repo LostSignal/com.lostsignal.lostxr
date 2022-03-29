@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1167103827440591304}
   - component: {fileID: 1167103827440591319}
   - component: {fileID: 1167103827440591318}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: Complex Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -273,6 +273,7 @@ MonoBehaviour:
   m_ForceGravityOnDetach: 0
   m_RetainTransformParent: 1
   m_AttachPointCompatibilityMode: 0
+  havenGrabbableSettings: {fileID: 11400000, guid: 7e6b6732524710d4dadd8d667f3fb00b, type: 2}
   isOffsetGrabbable: 0
   onHoverStart:
     m_PersistentCalls:

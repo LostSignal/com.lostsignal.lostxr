@@ -11378,6 +11378,7 @@ MonoBehaviour:
   m_ForceGravityOnDetach: 0
   m_RetainTransformParent: 1
   m_AttachPointCompatibilityMode: 0
+  havenGrabbableSettings: {fileID: 11400000, guid: 7e6b6732524710d4dadd8d667f3fb00b, type: 2}
   isOffsetGrabbable: 0
   onHoverStart:
     m_PersistentCalls:
@@ -14512,6 +14513,7 @@ MonoBehaviour:
   m_ForceGravityOnDetach: 0
   m_RetainTransformParent: 1
   m_AttachPointCompatibilityMode: 0
+  havenGrabbableSettings: {fileID: 11400000, guid: 7e6b6732524710d4dadd8d667f3fb00b, type: 2}
   isOffsetGrabbable: 0
   onHoverStart:
     m_PersistentCalls:
@@ -15276,6 +15278,7 @@ MonoBehaviour:
   m_ForceGravityOnDetach: 0
   m_RetainTransformParent: 1
   m_AttachPointCompatibilityMode: 0
+  havenGrabbableSettings: {fileID: 11400000, guid: 7e6b6732524710d4dadd8d667f3fb00b, type: 2}
   isOffsetGrabbable: 0
   onHoverStart:
     m_PersistentCalls:
@@ -15693,6 +15696,18 @@ PrefabInstance:
     - target: {fileID: 6775089112096727550, guid: 5127c7f632d15114d855a45418eac5ec, type: 3}
       propertyPath: m_Layer
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7346894174738159658, guid: 5127c7f632d15114d855a45418eac5ec, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7346894174738159658, guid: 5127c7f632d15114d855a45418eac5ec, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 7346894174738159658, guid: 5127c7f632d15114d855a45418eac5ec, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.301
       objectReference: {fileID: 0}
     - target: {fileID: 8471788243990357480, guid: 5127c7f632d15114d855a45418eac5ec, type: 3}
       propertyPath: m_Layer

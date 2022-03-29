@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settings:
     movementType: 2
+    selectMode: 0
+    customReticle: {fileID: 0}
     trackPosition: 1
     smoothPosition: 1
     smoothPositionAmount: 5
@@ -26,7 +28,7 @@ MonoBehaviour:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
+        time: 0.75
         value: 0
         inSlope: 0
         outSlope: 0
@@ -34,6 +36,15 @@ MonoBehaviour:
         weightedMode: 0
         inWeight: 0
         outWeight: 0
+      - serializedVersion: 3
+        time: 0.87758
+        value: 0.5154778
+        inSlope: 5.9974437
+        outSlope: 5.9974437
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
         value: 1

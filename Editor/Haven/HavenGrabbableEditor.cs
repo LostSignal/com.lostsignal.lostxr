@@ -6,34 +6,36 @@
 
 namespace Lost.Haven
 {
+    using Lost.EditorGrid;
     using UnityEditor;
 
     [CustomEditor(typeof(HavenGrabbable))]
     public class HavenGrabbableEditor : LostEditor
     {
+        private const int FoldoutId = 654864;
+
         public override void OnInspectorGUI()
         {
-            // base.OnInspectorGUI();
-
             this.DrawProperty("havenGrabbableSettings");
+            this.DrawProperty("isOffsetGrabbable");
+            this.DrawProperty("m_AttachTransform");
+            this.DrawProperty("m_InteractionLayers");
+            this.DrawProperty("m_Colliders");
 
-            this.DrawProperty("Interaction Layer Mask");
-            this.DrawProperty("Custom Reticle");
-            this.DrawProperty("Colliders");
-            this.DrawProperty("Select Mode");  // To Do - Actually move this to setting object
-            this.DrawProperty("Attach Transform");
-            this.DrawProperty("Is Offset Grabbable");
+            using (new FoldoutScope(FoldoutId, "Events", out bool visible))
+            {
+                if (visible)
+                {
+                    this.DrawProperty("onHoverStart");
+                    this.DrawProperty("onHoverStop");
 
-            // Make Events Foldout
-            this.DrawProperty("Hover Start/Stop");
-            this.DrawProperty("Grab Start/Stop");
-            this.DrawProperty("Use Start/Stop");
+                    this.DrawProperty("onGrabStart");
+                    this.DrawProperty("onGrabStop");
 
-            // Null out InteractionManager
-            // Add colliders if empty
-            // Make colliders to the right layer
-
-            // Make an Advanced Section?  All
+                    this.DrawProperty("onUseStart");
+                    this.DrawProperty("onUseStop");
+                }
+            }
         }
     }
 }

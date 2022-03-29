@@ -9,6 +9,7 @@
 namespace Lost.Haven
 {
     using Lost.Networking;
+    using Lost.XR;
     using UnityEngine;
     using UnityEngine.Events;
     using UnityEngine.XR.Interaction.Toolkit;
@@ -17,7 +18,7 @@ namespace Lost.Haven
     public class HavenGrabbable : XRGrabInteractable
     {
 #pragma warning disable 0649
-        [Header("Haven Variables")]
+        [SerializeField] private HavenGrabbableSettingsObject havenGrabbableSettings;
         [SerializeField] private bool isOffsetGrabbable = true;
 
         [Header("Hover")]
@@ -75,6 +76,11 @@ namespace Lost.Haven
             this.selectExited.AddListener(this.GrabStop);
             this.activated.AddListener(this.UseStart);
             this.deactivated.AddListener(this.UseStop);
+
+            if (this.havenGrabbableSettings != null)
+            {
+                this.havenGrabbableSettings.Apply(this);
+            }
         }
 
         protected override void OnSelectEntered(SelectEnterEventArgs selectEnterEventArgs)
@@ -115,6 +121,17 @@ namespace Lost.Haven
             }
 
             base.OnSelectExited(selectExitedEventArgs);
+        }
+
+        private void OnValidate()
+        {
+            if (this.havenGrabbableSettings == null)
+            {
+                this.havenGrabbableSettings = EditorUtil.GetAssetByGuid<HavenGrabbableSettingsObject>("7e6b6732524710d4dadd8d667f3fb00b");
+                EditorUtil.SetDirty(this);
+            }
+
+            HavenInteractableUtil.Setup(this, HavenLayer.Interactable);
         }
 
         private void HoverStart(HoverEnterEventArgs hoverEnterEventArgs)

@@ -27,20 +27,13 @@ namespace Lost.XR
                    throw new NotImplementedException();
         }
 
-        public static void SetLayerOnInteractableAndAllColliders(XRBaseInteractable interactable, HavenLayer layer)
+        public static void SetLayerOnColliders(XRBaseInteractable interactable, HavenLayer layer)
         {
             string layerName = GetLayerName(layer);
             int layerIndex = LayerMask.NameToLayer(layerName);
 
             if (layerIndex != -1)
             {
-                // Making sure the main object is on the correct layer
-                if (interactable.gameObject.layer != layerIndex)
-                {
-                    interactable.gameObject.layer = layerIndex;
-                    EditorUtil.SetDirty(interactable.gameObject);
-                }
-
                 // Making sure all colliders are on the right layer
                 foreach (var collider in interactable.colliders)
                 {
@@ -51,7 +44,7 @@ namespace Lost.XR
                     }
                 }
             }
-            else 
+            else
             {
                 Debug.LogError($"Error setting interactable to the \"{layerName}\" layer.  Please add layer to settings.", interactable);
             }

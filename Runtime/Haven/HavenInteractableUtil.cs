@@ -33,7 +33,7 @@ namespace Lost.XR
                 EditorUtil.SetDirty(interactable);
             }
 
-            HavenLayerUtil.SetLayerOnInteractableAndAllColliders(interactable, layer);
+            HavenLayerUtil.SetLayerOnColliders(interactable, layer);
         }
 
         [EditorEvents.OnEnterPlayMode]

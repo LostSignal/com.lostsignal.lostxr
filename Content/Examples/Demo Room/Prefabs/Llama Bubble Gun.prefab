@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 85975483747803501}
   - component: {fileID: 85975483747803500}
   - component: {fileID: 85975483747803507}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: Llama Bubble Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +138,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
-  m_Colliders: []
+  m_Colliders:
+  - {fileID: 952778919417107436}
   m_InteractionLayerMask:
     serializedVersion: 2
     m_Bits: 4294967231
@@ -240,6 +241,7 @@ MonoBehaviour:
   m_ForceGravityOnDetach: 0
   m_RetainTransformParent: 1
   m_AttachPointCompatibilityMode: 0
+  havenGrabbableSettings: {fileID: 11400000, guid: 7e6b6732524710d4dadd8d667f3fb00b, type: 2}
   isOffsetGrabbable: 0
   onHoverStart:
     m_PersistentCalls:
