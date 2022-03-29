@@ -17,14 +17,13 @@ namespace Lost.Haven
     {
         public override void OnInspectorGUI()
         {
-            this.DrawProperty("m_InteractionLayerMask");
             this.DrawProperty("m_CustomReticle");
             this.DrawProperty("type");
             this.DrawProperty("anchorTransform");
             this.DrawProperty("matchAnchorOrientation");
             this.DrawProperty("m_Colliders");
 
-            using (new FoldoutScope(846589, "Events", out bool visible))
+            using (new FoldoutScope(this.target.GetInstanceID(), "Events", out bool visible))
             {
                 if (visible)
                 {
@@ -32,6 +31,8 @@ namespace Lost.Haven
                     this.DrawProperty("onHoverEnd");
                 }
             }
+
+            this.serializedObject.ApplyModifiedProperties();
         }
     }
 }

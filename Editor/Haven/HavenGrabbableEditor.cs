@@ -12,8 +12,6 @@ namespace Lost.Haven
     [CustomEditor(typeof(HavenGrabbable))]
     public class HavenGrabbableEditor : LostEditor
     {
-        private const int FoldoutId = 654864;
-
         public override void OnInspectorGUI()
         {
             this.DrawProperty("havenGrabbableSettings");
@@ -22,7 +20,7 @@ namespace Lost.Haven
             this.DrawProperty("m_InteractionLayers");
             this.DrawProperty("m_Colliders");
 
-            using (new FoldoutScope(FoldoutId, "Events", out bool visible))
+            using (new FoldoutScope(this.target.GetInstanceID(), "Events", out bool visible))
             {
                 if (visible)
                 {
@@ -36,6 +34,8 @@ namespace Lost.Haven
                     this.DrawProperty("onUseStop");
                 }
             }
+
+            this.serializedObject.ApplyModifiedProperties();
         }
     }
 }

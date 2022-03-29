@@ -139,6 +139,20 @@ namespace Lost.XR
                 EditorUtil.SetDirty(this);
             }
 
+            #pragma warning disable CS0618
+            if (this.interactionLayerMask != 0)
+            {
+                this.interactionLayerMask = 0;
+                EditorUtil.SetDirty(this);
+            }
+            #pragma warning restore
+
+            if (this.interactionLayers != 0)
+            {
+                this.interactionLayers = 0;
+                EditorUtil.SetDirty(this);
+            }
+
             if (this.teleportationProvider != null)
             {
                 this.teleportationProvider = null;

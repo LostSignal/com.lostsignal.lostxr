@@ -148,9 +148,9 @@ MonoBehaviour:
   - {fileID: 6022886593690440037}
   m_InteractionLayerMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   m_InteractionLayers:
-    m_Bits: 65
+    m_Bits: 0
   m_SelectMode: 0
   m_CustomReticle: {fileID: 0}
   m_FirstHoverEntered:

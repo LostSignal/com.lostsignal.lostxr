@@ -1798,7 +1798,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5562160032815521190, guid: 854633a78f92c1745a544e10f8cda922, type: 3}
       propertyPath: m_InteractionLayers.m_Bits
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5974674523665034729, guid: 854633a78f92c1745a544e10f8cda922, type: 3}
       propertyPath: m_RootOrder
@@ -6149,7 +6149,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5562160032815521190, guid: 854633a78f92c1745a544e10f8cda922, type: 3}
       propertyPath: m_InteractionLayers.m_Bits
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5974674523665034729, guid: 854633a78f92c1745a544e10f8cda922, type: 3}
       propertyPath: m_RootOrder
@@ -7083,7 +7083,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5562160032815521190, guid: 40d64baa252c05a4398c92be5f11c38a, type: 3}
       propertyPath: m_InteractionLayers.m_Bits
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5974674523665034729, guid: 40d64baa252c05a4398c92be5f11c38a, type: 3}
       propertyPath: m_RootOrder
@@ -9485,7 +9485,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3934859279805147594, guid: c19ffb552406077409537751d97af681, type: 3}
       propertyPath: m_InteractionLayers.m_Bits
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8164705571879959090, guid: c19ffb552406077409537751d97af681, type: 3}
       propertyPath: m_RootOrder
@@ -12363,7 +12363,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5562160032815521190, guid: 40d64baa252c05a4398c92be5f11c38a, type: 3}
       propertyPath: m_InteractionLayers.m_Bits
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5974674523665034729, guid: 40d64baa252c05a4398c92be5f11c38a, type: 3}
       propertyPath: m_RootOrder
@@ -13033,7 +13033,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5562160032815521190, guid: 854633a78f92c1745a544e10f8cda922, type: 3}
       propertyPath: m_InteractionLayers.m_Bits
-      value: 4294967295
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5562160032815521190, guid: 854633a78f92c1745a544e10f8cda922, type: 3}
+      propertyPath: m_InteractionLayerMask.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5974674523665034729, guid: 854633a78f92c1745a544e10f8cda922, type: 3}
       propertyPath: m_RootOrder
@@ -13797,7 +13801,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3934859279805147594, guid: c19ffb552406077409537751d97af681, type: 3}
       propertyPath: m_InteractionLayers.m_Bits
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8164705571879959090, guid: c19ffb552406077409537751d97af681, type: 3}
       propertyPath: m_RootOrder
