@@ -10,6 +10,7 @@ namespace Lost.XR
 {
     using System.Runtime.CompilerServices;
     using UnityEngine;
+    using UnityEngine.Events;
     using UnityEngine.XR.Interaction.Toolkit;
 
     [AddComponentMenu("Haven XR/Interactables/HXR Teleport")]
@@ -28,13 +29,20 @@ namespace Lost.XR
         [Header("Scaling")]
         [SerializeField] private bool setScaleOnTeleport;
         [SerializeField] private float rigScale = 1.0f;
+
+        [Header("Hover")]
+        [SerializeField] private UnityEvent onHoverStart;
+        [SerializeField] private UnityEvent onHoverStop;
 #pragma warning restore 0649
 
         private System.Action<IXRInteractor, TeleportRequest> onTeleport;
 
         public event System.Action<IXRInteractor, TeleportRequest> OnTeleport
         {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             add => this.onTeleport += value;
+
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             remove => this.onTeleport -= value;
         }
 
@@ -50,6 +58,17 @@ namespace Lost.XR
         {
             this.teleportationProvider = HavenRig.Instance.TeleportationProvider;
             this.interactionManager = XRInteractionHelper.XRInteractionManagerInstance;
+
+            this.firstHoverEntered.AddListener(this.OnFirstHoverEnter);
+            this.lastHoverExited.AddListener(this.OnLastHoverExit);
+        }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+
+            this.firstHoverEntered.RemoveListener(this.OnFirstHoverEnter);
+            this.lastHoverExited.RemoveListener(this.OnLastHoverExit);
         }
 
         protected void OnDrawGizmos()
@@ -131,6 +150,16 @@ namespace Lost.XR
         {
             base.Awake();
             ActivationManager.Register(this);
+        }
+
+        private void OnFirstHoverEnter(HoverEnterEventArgs args)
+        {
+            this.onHoverStart.SafeInvoke();
+        }
+
+        private void OnLastHoverExit(HoverExitEventArgs args)
+        {
+            this.onHoverStop.SafeInvoke();
         }
     }
 }

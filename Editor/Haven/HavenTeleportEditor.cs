@@ -1,4 +1,4 @@
-﻿#pragma warning disable
+#pragma warning disable
 
 //-----------------------------------------------------------------------
 // <copyright file="HavenTeleportEditor.cs" company="Lost Signal LLC">
@@ -6,54 +6,32 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-#if USING_HAVEN
-
-namespace Lost.XR
+namespace Lost.Haven
 {
+    using Lost.EditorGrid;
+    using Lost.XR;
     using UnityEditor;
-    using UnityEditor.XR.Interaction.Toolkit;
 
-    [CustomEditor(typeof(HavenTeleport), true), CanEditMultipleObjects]
-    public class HavenTeleportEditor : BaseTeleportationInteractableEditor
+    [CustomEditor(typeof(HavenTeleport)), CanEditMultipleObjects]
+    public class HavenTeleportEditor : LostEditor
     {
-        private SerializedProperty teleportType;
-        private SerializedProperty anchorOverrideTransform;
-        private SerializedProperty colliders;
-        private SerializedProperty customReticle;
-        private SerializedProperty setScaleOnTeleport;
-        private SerializedProperty rigScale;
-
-        protected override void OnEnable()
+        public override void OnInspectorGUI()
         {
-            base.OnEnable();
+            this.DrawProperty("m_InteractionLayerMask");
+            this.DrawProperty("m_CustomReticle");
+            this.DrawProperty("type");
+            this.DrawProperty("anchorTransform");
+            this.DrawProperty("matchAnchorOrientation");
+            this.DrawProperty("m_Colliders");
 
-            this.teleportType = serializedObject.FindProperty("type");
-            this.anchorOverrideTransform = serializedObject.FindProperty("anchorOverrideTransform");
-            this.colliders = serializedObject.FindProperty("m_Colliders");
-            this.customReticle = serializedObject.FindProperty("m_CustomReticle");
-            this.setScaleOnTeleport = serializedObject.FindProperty("setScaleOnTeleport");
-            this.rigScale = serializedObject.FindProperty("rigScale");
-        }
-
-        protected override void DrawProperties()
-        {
-            EditorGUILayout.PropertyField(this.teleportType);
-
-            if (this.teleportType.intValue == (int)HavenTeleport.TeleportType.Anchor)
+            using (new FoldoutScope(846589, "Events", out bool visible))
             {
-                EditorGUILayout.PropertyField(this.anchorOverrideTransform);
-            }
-
-            EditorGUILayout.PropertyField(this.colliders);
-            EditorGUILayout.PropertyField(this.customReticle);
-            EditorGUILayout.PropertyField(this.setScaleOnTeleport);
-
-            if (this.setScaleOnTeleport.boolValue)
-            {
-                EditorGUILayout.PropertyField(this.rigScale);
+                if (visible)
+                {
+                    this.DrawProperty("onHoverStart");
+                    this.DrawProperty("onHoverEnd");
+                }
             }
         }
     }
 }
-
-#endif
