@@ -4,8 +4,9 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace Lost.XR
+namespace Lost.Haven
 {
+    using Lost.XR;
     using System;
     using UnityEngine;
     using UnityEngine.XR.Interaction.Toolkit;

@@ -6,7 +6,7 @@
 
 #if UNITY
 
-namespace Lost.XR
+namespace Lost.Haven
 {
     using Lost;
     using UnityEngine;

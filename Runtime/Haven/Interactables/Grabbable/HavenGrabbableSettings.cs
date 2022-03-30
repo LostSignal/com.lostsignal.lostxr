@@ -15,6 +15,8 @@ namespace Lost.Haven
     [Serializable]
     public class HavenGrabbableSettings
     {
+        [Space]
+        [SerializeField] private InteractionLayerMask interactionLayers = -1;
         [SerializeField] private UnityEngine.XR.Interaction.Toolkit.XRBaseInteractable.MovementType movementType;
         [SerializeField] private InteractableSelectMode selectMode;
         [SerializeField] private GameObject customReticle;
@@ -54,6 +56,7 @@ namespace Lost.Haven
 
         public void Apply(HavenGrabbable grabbable)
         {
+            grabbable.interactionLayers = this.interactionLayers;
             grabbable.movementType = this.movementType;
             grabbable.selectMode = this.selectMode;
             grabbable.customReticle = this.customReticle;

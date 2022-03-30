@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------
-// <copyright file="HavenGrabbableEditor.cs" company="Lost Signal LLC">
+// <copyright file="HavenSocketEditor.cs" company="Lost Signal LLC">
 //     Copyright (c) Lost Signal LLC. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -9,28 +9,25 @@ namespace Lost.Haven
     using Lost.EditorGrid;
     using UnityEditor;
 
-    [CustomEditor(typeof(HavenGrabbable))]
-    public class HavenGrabbableEditor : LostEditor
+    [CustomEditor(typeof(HavenSocket))]
+    public class HavenSocketEditor : LostEditor
     {
         public override void OnInspectorGUI()
         {
-            this.DrawProperty("havenGrabbableSettings");
-            this.DrawProperty("isOffsetGrabbable");
+            this.DrawProperty("havenSocketSettings");
+            this.DrawProperty("m_SocketActive");
+            this.DrawProperty("m_StartingSelectedInteractable");
             this.DrawProperty("m_AttachTransform");
-            this.DrawProperty("m_Colliders");
+            this.DrawProperty("onlyAllowSpecificSocketTarget");
+            this.DrawProperty("socketTargetName");
 
             using (new FoldoutScope(this.target.GetInstanceID(), "Events", out bool visible))
             {
                 if (visible)
                 {
-                    this.DrawProperty("onHoverStart");
-                    this.DrawProperty("onHoverStop");
-
-                    this.DrawProperty("onGrabStart");
-                    this.DrawProperty("onGrabStop");
-
-                    this.DrawProperty("onUseStart");
-                    this.DrawProperty("onUseStop");
+                    this.DrawProperty("m_HoverEntered");
+                    this.DrawProperty("m_HoverExited");
+                    this.DrawProperty("m_SelectEntered");
                 }
             }
 

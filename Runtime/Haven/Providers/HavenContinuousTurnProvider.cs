@@ -4,8 +4,9 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace Lost.XR
+namespace Lost.Haven
 {
+    using Lost.XR;
     using UnityEngine;
     using UnityEngine.XR.Interaction.Toolkit;
 
@@ -13,15 +14,15 @@ namespace Lost.XR
     {
         private static readonly Vector2 Zero = new Vector2(0.0f, 0.0f);
 
-        #pragma warning disable 0649
+#pragma warning disable 0649
         [SerializeField] private float debounceTime;
         [SerializeField] private bool enableTurnAround;
-        #pragma warning restore 0649
+#pragma warning restore 0649
 
         private float lastTurnTime;
         private HavenHand turnHand;
         private bool isLeftHand;
-        
+
         public void UpdateSettings(HavenRigSettings settings, HavenHand leftHand, HavenHand rightHand)
         {
             this.enabled = settings.TurnMode == TurnMode.Continuous;

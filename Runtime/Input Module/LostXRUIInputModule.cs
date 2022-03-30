@@ -10,7 +10,7 @@
 #define USING_UNITY_XR
 #endif
 
-namespace Lost.Haven
+namespace Lost.XR
 {
     [UnityEngine.AddComponentMenu("")]
 #if USING_UNITY_XR

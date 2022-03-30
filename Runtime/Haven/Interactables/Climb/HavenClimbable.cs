@@ -1,29 +1,31 @@
 //-----------------------------------------------------------------------
-// <copyright file="HavenClimbInteractable.cs" company="Lost Signal LLC">
+// <copyright file="HavenClimbable.cs" company="Lost Signal LLC">
 //     Copyright (c) Lost Signal LLC. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace Lost.XR
+namespace Lost.Haven
 {
     using System.Collections.Generic;
     using UnityEngine;
     using UnityEngine.XR.Interaction.Toolkit;
 
-    public class HavenClimbInteractable : XRBaseInteractable, IAwake
+    public class HavenClimbable : XRBaseInteractable, IAwake
     {
         private static readonly Dictionary<int, HavenHand> Hands = new Dictionary<int, HavenHand>();
 
 #pragma warning disable 0649
-        [SerializeField] private Collider climbCollider;
+        [SerializeField] private HavenClimbSettingsObject havenClimbSettings;
         [SerializeField] private Rigidbody climbRigidbody;
 #pragma warning restore 0649
 
         public void OnAwake()
         {
-            Debug.Assert(this.climbCollider != null, this);
-            Debug.Assert(this.climbRigidbody != null, this);
-            Debug.Assert(this.climbRigidbody.isKinematic, this);
+            this.AssertNotNull(this.havenClimbSettings, nameof(this.havenClimbSettings));
+            this.AssertNotNull(this.climbRigidbody, nameof(this.climbRigidbody));
+            this.AssertTrue(this.climbRigidbody.isKinematic, nameof(this.climbRigidbody.isKinematic));
+
+            this.havenClimbSettings.Apply(this);
         }
 
         protected override void Awake()
@@ -99,21 +101,27 @@ namespace Lost.XR
                 return;
             }
 
-            if (this.climbCollider == null)
-            {
-                this.climbCollider = this.GetComponent<Collider>();
-                EditorUtil.SetDirty(this);
-            }
-
             if (this.climbRigidbody == null)
             {
                 this.climbRigidbody = this.GetComponent<Rigidbody>();
                 EditorUtil.SetDirty(this);
             }
-            
+
             if (this.climbRigidbody != null && this.climbRigidbody.isKinematic == false)
             {
                 this.climbRigidbody.isKinematic = true;
+                EditorUtil.SetDirty(this);
+            }
+
+            if (this.selectMode != InteractableSelectMode.Single)
+            {
+                this.selectMode = InteractableSelectMode.Single;
+                EditorUtil.SetDirty(this);
+            }
+
+            if (this.havenClimbSettings == null)
+            {
+                this.havenClimbSettings = EditorUtil.GetAssetByGuid<HavenClimbSettingsObject>("bf2e9105aa6b8fa4aaee8519fe305e62");
                 EditorUtil.SetDirty(this);
             }
 

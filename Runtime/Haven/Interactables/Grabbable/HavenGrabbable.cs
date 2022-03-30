@@ -125,6 +125,11 @@ namespace Lost.Haven
 
         private void OnValidate()
         {
+            if (Application.isPlaying)
+            {
+                return;
+            }
+
             if (this.havenGrabbableSettings == null)
             {
                 this.havenGrabbableSettings = EditorUtil.GetAssetByGuid<HavenGrabbableSettingsObject>("7e6b6732524710d4dadd8d667f3fb00b");

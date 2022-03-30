@@ -6,7 +6,7 @@
 
 #if USING_LOST_UGUI
 
-namespace Lost
+namespace Lost.XR
 {
     using UnityEngine;
 
@@ -46,8 +46,8 @@ namespace Lost
         [SerializeField] private bool isGrabable;
 #endif
 
-        [SerializeField][HideInInspector] private Dialog dialog;
-        [SerializeField][HideInInspector] private Canvas dialogCanvas;
+        [SerializeField] [HideInInspector] private Dialog dialog;
+        [SerializeField] [HideInInspector] private Canvas dialogCanvas;
 #pragma warning restore 0649
 
         private bool disableHeadTracking;

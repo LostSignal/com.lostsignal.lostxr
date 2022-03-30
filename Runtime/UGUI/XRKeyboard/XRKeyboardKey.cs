@@ -1,4 +1,4 @@
-﻿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="XRKeyboardKey.cs" company="Lost Signal LLC">
 //     Copyright (c) Lost Signal LLC. All rights reserved.
 // </copyright>
@@ -6,7 +6,7 @@
 
 #if USING_LOST_UGUI
 
-namespace Lost
+namespace Lost.XR
 {
     using TMPro;
     using UnityEngine;
@@ -51,13 +51,13 @@ namespace Lost
             base.OnPointerDown(eventData);
         }
 
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         protected override void OnValidate()
         {
             base.OnValidate();
             this.AssertGetComponent(ref this.text);
         }
-        #endif
+#endif
     }
 }
 

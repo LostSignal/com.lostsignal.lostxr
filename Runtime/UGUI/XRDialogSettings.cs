@@ -6,7 +6,7 @@
 
 #if USING_LOST_UGUI
 
-namespace Lost
+namespace Lost.XR
 {
     using System;
     using UnityEngine;

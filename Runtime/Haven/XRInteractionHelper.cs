@@ -6,7 +6,7 @@
 
 #if true // UNITY && USING_UNITY_XR_INTERACTION_TOOLKIT
 
-namespace Lost.XR
+namespace Lost.Haven
 {
     using System.Collections;
     using UnityEngine;

@@ -4,7 +4,7 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace Lost.XR
+namespace Lost.Haven
 {
     using UnityEngine;
     using UnityEngine.XR.Interaction.Toolkit;
@@ -21,18 +21,22 @@ namespace Lost.XR
             }
 
             // Auto populating a collider if it already exists
-            var colliders = interactable.GetComponentsInChildren<Collider>();
-
-            if (colliders?.Length > 0 && interactable.colliders != null && interactable.colliders.Count == 0)
+            if (interactable.colliders.Count == 0)
             {
-                foreach (var collider in colliders)
-                {
-                    interactable.colliders.Add(collider);
-                }
+                var colliders = interactable.GetComponentsInChildren<Collider>();
 
-                EditorUtil.SetDirty(interactable);
+                if (colliders.Length > 0)
+                {
+                    foreach (var collider in colliders)
+                    {
+                        interactable.colliders.Add(collider);
+                    }
+
+                    EditorUtil.SetDirty(interactable);
+                }
             }
 
+            // Setting collider layers
             HavenLayerUtil.SetLayerOnColliders(interactable, layer);
         }
 

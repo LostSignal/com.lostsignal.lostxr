@@ -16,7 +16,6 @@ namespace Lost
     using System.Collections;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using Lost.Haven;
     using Lost.XR;
     using UnityEngine;
     using UnityEngine.InputSystem.UI;
@@ -31,18 +30,18 @@ namespace Lost
             instance = null;
         }
 
-        #pragma warning disable 0649
+#pragma warning disable 0649
         [SerializeField] private XRUtilManager xrUtilManager;
 
         [Header("Event Systems")]
         [SerializeField] private InputSystemUIInputModule flatInputSystem;
         [SerializeField] private LostXRUIInputModule xrInputSystem;
-        #pragma warning restore 0649
+#pragma warning restore 0649
 
 
         public static XRManager Instance => instance;
 
-        public bool IsFlatMode 
+        public bool IsFlatMode
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get => this.xrUtilManager.IsFlatMode;

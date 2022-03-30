@@ -4,7 +4,7 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace Lost.XR
+namespace Lost.Haven
 {
     using System.Runtime.CompilerServices;
     using UnityEngine;

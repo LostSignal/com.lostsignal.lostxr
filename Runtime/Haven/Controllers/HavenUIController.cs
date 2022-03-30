@@ -4,7 +4,7 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace Lost.XR
+namespace Lost.Haven
 {
     using System.Runtime.CompilerServices;
     using UnityEngine;
@@ -12,9 +12,9 @@ namespace Lost.XR
 
     public sealed class HavenUIController : XRController
     {
-        #pragma warning disable 0649
+#pragma warning disable 0649
         [SerializeField] private XRBaseControllerInteractor interactor;
-        #pragma warning restore 0649
+#pragma warning restore 0649
 
         private bool isPressed = false;
         private bool previousIsPressed = false;

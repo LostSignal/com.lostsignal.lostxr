@@ -4,9 +4,9 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-#if true // UNITY
+#if UNITY
 
-namespace Lost.XR
+namespace Lost.Haven
 {
     using System.Runtime.CompilerServices;
     using UnityEngine;
@@ -139,17 +139,9 @@ namespace Lost.XR
                 EditorUtil.SetDirty(this);
             }
 
-            #pragma warning disable CS0618
-            if (this.interactionLayerMask != 0)
+            if (this.interactionLayers != HavenLayerUtil.GetLayerMask(HavenLayer.Teleport))
             {
-                this.interactionLayerMask = 0;
-                EditorUtil.SetDirty(this);
-            }
-            #pragma warning restore
-
-            if (this.interactionLayers != 0)
-            {
-                this.interactionLayers = 0;
+                this.interactionLayers = HavenLayerUtil.GetLayerMask(HavenLayer.Teleport);
                 EditorUtil.SetDirty(this);
             }
 

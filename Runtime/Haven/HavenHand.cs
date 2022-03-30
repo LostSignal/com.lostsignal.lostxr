@@ -4,9 +4,10 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace Lost.XR
+namespace Lost.Haven
 {
     using System.Runtime.CompilerServices;
+    using Lost.XR;
     using UnityEngine;
 
     public class HavenHand : MonoBehaviour

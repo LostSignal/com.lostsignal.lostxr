@@ -4,11 +4,12 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace Lost.XR
+namespace Lost.Haven
 {
     using System;
     using System.Collections;
     using System.Runtime.CompilerServices;
+    using Lost.XR;
     using Unity.XR.CoreUtils;
     using UnityEngine;
     using UnityEngine.XR;

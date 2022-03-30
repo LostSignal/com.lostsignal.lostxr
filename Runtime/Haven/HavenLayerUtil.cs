@@ -4,7 +4,7 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace Lost.XR
+namespace Lost.Haven
 {
     using System;
     using UnityEngine;
@@ -25,6 +25,11 @@ namespace Lost.XR
                    layer == HavenLayer.Interactor ? "Interactor" :
                    layer == HavenLayer.Teleport ? "Teleport" :
                    throw new NotImplementedException();
+        }
+
+        public static int GetLayerMask(HavenLayer layer)
+        {
+            return LayerMask.NameToLayer(GetLayerName(layer));
         }
 
         public static void SetLayerOnColliders(XRBaseInteractable interactable, HavenLayer layer)

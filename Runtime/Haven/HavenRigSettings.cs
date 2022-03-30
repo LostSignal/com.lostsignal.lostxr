@@ -4,10 +4,10 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-using System;
-
-namespace Lost.XR
+namespace Lost.Haven
 {
+    using System;
+
     public enum Hand
     {
         Left,
