@@ -2514,7 +2514,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 043179ce312369743ae686d80f77ec26, type: 2}
+  - {fileID: 2100000, guid: 5c1069d44c98cc340acb55e09ca5aa54, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2721,7 +2721,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8854365730113241955, guid: d78244816c1de074ebd205414e391377, type: 3}
       propertyPath: m_Name
-      value: Lost XR Manager
+      value: XR Manager
       objectReference: {fileID: 0}
     - target: {fileID: 8854365730113241958, guid: d78244816c1de074ebd205414e391377, type: 3}
       propertyPath: m_RootOrder
@@ -5258,7 +5258,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 043179ce312369743ae686d80f77ec26, type: 2}
+  - {fileID: 2100000, guid: 5c1069d44c98cc340acb55e09ca5aa54, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

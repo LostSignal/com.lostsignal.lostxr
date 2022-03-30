@@ -7,7 +7,7 @@
 //// NOTE [bgish]: There is a bug in StyleCop that thinks that Local Functions need this prefix, so turning it off.
 #pragma warning disable SA1101
 
-#if USING_UNITY_XR_INTERACTION_TOOLKIT && USING_UNITY_ANIMATION_RIGGING
+#if UNITY && USING_UNITY_ANIMATION_RIGGING
 
 namespace Lost
 {
@@ -59,10 +59,10 @@ namespace Lost
                 boneTransforms.Add(rigNameToTransform[humanBone.boneName]);
             }
 
-            #if UNITY_EDITOR
+#if UNITY_EDITOR
             var boneRenderer = GetOrAddComponentToGameObject<BoneRenderer>(this.gameObject);
             boneRenderer.transforms = boneTransforms.ToArray();
-            #endif
+#endif
 
             // Setting up Rig
             var vrConstraints = GetOrCreateChildGameObject(this.gameObject, "VR Constraints");

@@ -4,16 +4,16 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-#if USING_UNITY_XR_INTERACTION_TOOLKIT
+#if UNITY
 
 namespace Lost.Haven
 {
     using System.Collections;
     using Lost;
 
-    #if USING_DISSONANCE
+#if USING_DISSONANCE
     using Lost.DissonanceIntegration;
-    #endif
+#endif
 
     using Lost.Networking;
     using Lost.XR;
@@ -32,9 +32,9 @@ namespace Lost.Haven
         public static readonly ObjectTracker<HavenAvatar> Avatars = new ObjectTracker<HavenAvatar>(20);
 
 #pragma warning disable 0649
-        #if USING_DISSONANCE
+#if USING_DISSONANCE
         [SerializeField] private DissonancePlayerTracker dissonancePlayerTracker;
-        #endif
+#endif
 
         [Header("Visuals")]
         [SerializeField] private HavenAvatarVisuals avatarVisualsHeadOnly;
@@ -91,9 +91,9 @@ namespace Lost.Haven
 
             this.AssertGetComponent(ref this.avatarTransform);
 
-            #if USING_DISSONANCE
+#if USING_DISSONANCE
             this.AssertGetComponentInChildren(ref this.dissonancePlayerTracker);
-            #endif
+#endif
         }
 
         protected override void Awake()

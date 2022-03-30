@@ -1,6 +1,6 @@
 {
   "name": "com.lostsignal.lostxr",
-  "displayName": "Lost XR",
+  "displayName": "Lost Haven",
   "version": "0.1.0",
   "unity": "2021.1",
   "description": "Lost XR",
@@ -9,8 +9,8 @@
   ],
   "category": "",
   "dependencies": {
-    "com.unity.inputsystem": "1.3.0",
-    "com.unity.xr.management": "4.2.1"
+    "com.unity.xr.management": "4.2.1",
+    "com.unity.xr.interaction.toolkit": "2.0.1"
   },
   "type": "library"
 }

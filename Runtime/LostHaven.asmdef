@@ -1,0 +1,27 @@
+{
+    "name": "LostXR",
+    "rootNamespace": "",
+    "references": [
+        "GUID:8e683a3d6d1f7a74da811ef5727a2526",
+        "GUID:5d1c6bed32d6262429a7da8233a5b65b",
+        "GUID:dc960734dc080426fa6612f1c5fe95f3",
+        "GUID:e40ba710768534012815d3193fa296cb",
+        "GUID:fe685ec1767f73d42b749ea8045bfe43",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "Unity",
+            "expression": "0.0.0",
+            "define": "UNITY"
+        }
+    ],
+    "noEngineReferences": false
+}
