@@ -4,12 +4,11 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-#if UNITY
+#if USING_UNITY_XR_INTERACTION_TOOLKIT
 
 namespace Lost.Haven
 {
     using Lost.Networking;
-    using Lost.XR;
     using UnityEngine;
     using UnityEngine.Events;
     using UnityEngine.XR.Interaction.Toolkit;

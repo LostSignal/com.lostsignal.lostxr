@@ -4,7 +4,7 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-#if UNITY
+#if USING_UNITY_XR_INTERACTION_TOOLKIT
 
 namespace Lost.Haven
 {
@@ -92,7 +92,7 @@ namespace Lost.Haven
             }
             catch (Exception ex)
             {
-                Debug.LogException(ex);
+                this.LogException(ex);
             }
         }
     }

@@ -4,10 +4,11 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-#if UNITY
+#if USING_UNITY_XR_INTERACTION_TOOLKIT
 
 namespace Lost.Haven
 {
+    using System;
     using System.Runtime.CompilerServices;
     using UnityEngine;
     using UnityEngine.Events;
@@ -25,10 +26,6 @@ namespace Lost.Haven
 
         [ShowIf("type", TeleportType.Anchor)]
         [SerializeField] private bool matchAnchorOrientation = true;
-
-        [Header("Scaling")]
-        [SerializeField] private bool setScaleOnTeleport;
-        [SerializeField] private float rigScale = 1.0f;
 
         [Header("Hover")]
         [SerializeField] private UnityEvent onHoverStart;
@@ -105,15 +102,17 @@ namespace Lost.Haven
             }
             else
             {
-                throw new System.NotImplementedException();
+                throw new NotImplementedException();
             }
 
-            if (this.setScaleOnTeleport)
+            try
             {
-                //// CoroutineRunner.Instance.ExecuteDelayed(0.1f, () => HavenRig.GetRig().SetScale(this.rigScale));
+                this.onTeleport?.Invoke(interactor, teleportRequest);
             }
-
-            this.onTeleport?.Invoke(interactor, teleportRequest);
+            catch (Exception ex)
+            {
+                this.LogException(ex);
+            }
 
             return true;
         }

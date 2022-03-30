@@ -6,10 +6,6 @@
 
 #if UNITY
 
-#if USING_UNITY_XR_INTERACTION_TOOLKIT && USING_UNITY_XR_MANAGEMENT
-#define USING_UNITY_XR
-#endif
-
 namespace Lost
 {
     using System;

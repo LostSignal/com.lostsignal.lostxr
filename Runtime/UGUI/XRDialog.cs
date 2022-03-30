@@ -10,7 +10,7 @@ namespace Lost.XR
 {
     using UnityEngine;
 
-#if USING_LOST_XR
+#if USING_UNITY_XR_INTERACTION_TOOLKIT
     using UnityEngine.XR.Interaction.Toolkit;
     using UnityEngine.XR.Interaction.Toolkit.UI;
 #endif
@@ -42,7 +42,7 @@ namespace Lost.XR
 #pragma warning disable 0649
         [SerializeField] private XRDialogSettings settings;
 
-#if USING_LOST_XR
+#if USING_UNITY_XR_INTERACTION_TOOLKIT
         [SerializeField] private bool isGrabable;
 #endif
 
@@ -55,7 +55,7 @@ namespace Lost.XR
         private bool isPancakeMode;
         private bool hasBeenGrabbed;
 
-#if USING_LOST_XR
+#if USING_UNITY_XR_INTERACTION_TOOLKIT
         private TrackedDeviceGraphicRaycaster trackedDeviceGraphicRaycaster;
         private XRGrabInteractable xrGrabInteractable;
 #endif
@@ -130,7 +130,7 @@ namespace Lost.XR
         {
             //// TODO [bgish]: Do some calculations to spawn this dialog in front of the user
 
-#if USING_LOST_XR
+#if USING_UNITY_XR_INTERACTION_TOOLKIT
             this.isPancakeMode = XRManager.Instance != null && XRManager.Instance.IsFlatMode;
 #else
             this.isPancakeMode = true;
@@ -140,7 +140,7 @@ namespace Lost.XR
             {
                 this.enabled = true;
 
-#if USING_LOST_XR
+#if USING_UNITY_XR_INTERACTION_TOOLKIT
                 if (this.trackedDeviceGraphicRaycaster == null)
                 {
                     this.trackedDeviceGraphicRaycaster = this.GetOrAddComponent<TrackedDeviceGraphicRaycaster>();
@@ -156,12 +156,7 @@ namespace Lost.XR
                         this.xrGrabInteractable.attachEaseInTime = -1.0f;
                         this.xrGrabInteractable.movementType = XRBaseInteractable.MovementType.Instantaneous;
                         this.xrGrabInteractable.throwOnDetach = false;
-
-#if UNITY_2020_2_OR_NEWER
                         this.xrGrabInteractable.forceGravityOnDetach = false;
-#else
-                        this.xrGrabInteractable.gravityOnDetach = false;
-#endif
 
                         this.xrGrabInteractable.trackPosition = true;
                         this.xrGrabInteractable.smoothPosition = true;

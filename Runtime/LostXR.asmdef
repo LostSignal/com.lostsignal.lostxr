@@ -28,6 +28,11 @@
             "name": "com.lostsignal.lostugui",
             "expression": "0.0.0",
             "define": "USING_LOST_UGUI"
+        },
+        {
+            "name": "com.unity.xr.interaction.toolkit",
+            "expression": "2.0.1",
+            "define": "USING_UNITY_XR_INTERACTION_TOOLKIT"
         }
     ],
     "noEngineReferences": false

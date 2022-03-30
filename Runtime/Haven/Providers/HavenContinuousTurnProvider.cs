@@ -4,6 +4,8 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+#if USING_UNITY_XR_INTERACTION_TOOLKIT
+
 namespace Lost.Haven
 {
     using Lost.XR;
@@ -60,3 +62,5 @@ namespace Lost.Haven
         }
     }
 }
+
+#endif

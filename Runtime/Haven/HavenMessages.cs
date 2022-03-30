@@ -4,7 +4,7 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-#if USING_LOST_UGUI
+#if USING_UNITY_XR_INTERACTION_TOOLKIT && USING_LOST_UGUI
 
 namespace Lost.Haven
 {
