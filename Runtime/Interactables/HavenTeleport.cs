@@ -30,17 +30,18 @@ namespace Lost.Haven
         [Header("Hover")]
         [SerializeField] private UnityEvent onHoverStart;
         [SerializeField] private UnityEvent onHoverStop;
+        [SerializeField] private UnityEvent onTeleport;
 #pragma warning restore 0649
 
-        private System.Action<IXRInteractor, TeleportRequest> onTeleport;
+        private Action<IXRInteractor, TeleportRequest> onTeleportAction;
 
-        public event System.Action<IXRInteractor, TeleportRequest> OnTeleport
+        public event Action<IXRInteractor, TeleportRequest> OnTeleport
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            add => this.onTeleport += value;
+            add => this.onTeleportAction += value;
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            remove => this.onTeleport -= value;
+            remove => this.onTeleportAction -= value;
         }
 
         public enum TeleportType
@@ -107,7 +108,8 @@ namespace Lost.Haven
 
             try
             {
-                this.onTeleport?.Invoke(interactor, teleportRequest);
+                this.onTeleport.SafeInvoke();
+                this.onTeleportAction?.Invoke(interactor, teleportRequest);
             }
             catch (Exception ex)
             {

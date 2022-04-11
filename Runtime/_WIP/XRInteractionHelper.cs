@@ -8,7 +8,6 @@
 
 namespace Lost.Haven
 {
-    using System.Collections;
     using UnityEngine;
     using UnityEngine.SceneManagement;
     using UnityEngine.XR.Interaction.Toolkit;

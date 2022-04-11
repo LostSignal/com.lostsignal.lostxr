@@ -114,6 +114,18 @@ namespace Lost.Haven
             get => this.rightHandTransform;
         }
 
+        public HavenHand LeftHand
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get => this.leftHand;
+        }
+
+        public HavenHand RightHand
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get => this.rightHand;
+        }
+
         public static Coroutine WaitForRig()
         {
             Debug.LogError("WaitForRig Called!");

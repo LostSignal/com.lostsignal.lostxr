@@ -46,6 +46,12 @@ namespace Lost.Haven
             get => this.interactor.hasHover;
         }
 
+        public XRBaseControllerInteractor Interactor
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get => this.interactor;
+        }
+
         protected override void Awake()
         {
             base.Awake();

@@ -11,6 +11,7 @@ namespace Lost.Haven
     using System.Runtime.CompilerServices;
     using Lost.XR;
     using UnityEngine;
+    using UnityEngine.XR.Interaction.Toolkit;
 
     public class HavenHand : MonoBehaviour
     {
@@ -76,6 +77,30 @@ namespace Lost.Haven
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set => this.disableTeleport = value;
+        }
+
+        public bool IsHolding(IXRSelectInteractable item)
+        {
+            return this.directGrab.Interactor.interactablesSelected.Contains(item) || this.rayGrab.Interactor.interactablesSelected.Contains(item);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Deselect(IXRSelectInteractable deselect)
+        {
+            if (this.rayGrab.Interactor.interactablesSelected.Contains(deselect))
+            {
+                XRInteractionHelper.XRInteractionManagerInstance.SelectExit(this.rayGrab.Interactor, deselect);
+            }
+            else if (this.directGrab.Interactor.interactablesSelected.Contains(deselect))
+            {
+                XRInteractionHelper.XRInteractionManagerInstance.SelectExit(this.directGrab.Interactor, deselect);
+            }
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Select(IXRSelectInteractable select)
+        {
+            XRInteractionHelper.XRInteractionManagerInstance.SelectEnter(this.directGrab.Interactor, select);
         }
 
         private void Awake()

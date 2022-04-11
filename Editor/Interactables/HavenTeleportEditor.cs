@@ -26,7 +26,8 @@ namespace Lost.Haven
                 if (visible)
                 {
                     this.DrawProperty("onHoverStart");
-                    this.DrawProperty("onHoverEnd");
+                    this.DrawProperty("onHoverStop");
+                    this.DrawProperty("onTeleport");
                 }
             }
 
