@@ -586,8 +586,6 @@ MonoBehaviour:
   type: 0
   anchorTransform: {fileID: 0}
   matchAnchorOrientation: 1
-  setScaleOnTeleport: 0
-  rigScale: 1
   onHoverStart:
     m_PersistentCalls:
       m_Calls:

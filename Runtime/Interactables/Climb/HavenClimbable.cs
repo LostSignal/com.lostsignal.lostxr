@@ -12,6 +12,7 @@ namespace Lost.Haven
     using UnityEngine;
     using UnityEngine.XR.Interaction.Toolkit;
 
+    [AddComponentMenu("Haven XR/Interactables/HXR Climbable")]
     public class HavenClimbable : XRBaseInteractable, IAwake
     {
         private static readonly Dictionary<int, HavenHand> Hands = new Dictionary<int, HavenHand>();
