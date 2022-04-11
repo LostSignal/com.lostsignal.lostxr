@@ -10,6 +10,7 @@ namespace Lost.Haven
 {
     using System;
     using System.Collections;
+    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using Lost.XR;
     using Unity.XR.CoreUtils;
@@ -62,6 +63,8 @@ namespace Lost.Haven
         [SerializeField] private XROrigin xrOrigin;
         [SerializeField] private XRUtilManager xrUtilManager;
 #pragma warning restore 0649
+
+        private Dictionary<int, XRController> controllerCache = new Dictionary<int, XRController>();
 
         private bool isClimbingWithLeftHand;
         private bool isClimbingWithRightHand;
@@ -140,6 +143,31 @@ namespace Lost.Haven
             }
         }
 
+        public void SendHapticImpluse(XRBaseInteractor interactor, float amplitude, float duration)
+        {
+            int instanceId = interactor.GetInstanceID();
+
+            if (this.controllerCache.TryGetValue(instanceId, out XRController controller) == false)
+            {
+                bool isHandInteractor = this.rightHand.HasInteractor(interactor) || this.leftHand.HasInteractor(interactor);
+
+                if (isHandInteractor && interactor.TryGetComponent(out controller))
+                {
+                    this.controllerCache.Add(instanceId, controller);
+                }
+                else
+                {
+                    this.controllerCache.Add(instanceId, null);
+                }
+            }
+
+            if (controller != null && controller.inputDevice.TryGetHapticCapabilities(out HapticCapabilities capabilities) && capabilities.supportsImpulse)
+            {
+                uint channel = 0;
+                controller.inputDevice.SendHapticImpulse(channel, amplitude, duration);
+            }
+        }
+
         private void Awake()
         {
             if (instance != null)
@@ -197,11 +225,9 @@ namespace Lost.Haven
             if (this.isClimbingWithLeftHand || this.isClimbingWithRightHand)
             {
                 Vector3 offset = Zero;
-                int activeHands = 0;
 
                 if (this.isClimbingWithLeftHand)
                 {
-                    activeHands++;
                     Vector3 leftHandPosition = this.leftHandTransform.position;
                     offset += this.leftHandPreviousPosition - leftHandPosition;
                     this.leftHandPreviousPosition = leftHandPosition;
@@ -209,14 +235,10 @@ namespace Lost.Haven
 
                 if (this.isClimbingWithRightHand)
                 {
-                    activeHands++;
                     Vector3 rightHandPosition = this.rightHandTransform.position;
                     offset += this.rightHandPreviousPosition - rightHandPosition;
                     this.rightHandPreviousPosition = rightHandPosition;
                 }
-
-                // NOTE [bgish]: Not sure if averaging is the best route if you have multiple hands climbing at once, test and find out
-                offset /= activeHands;
 
                 this.characterController.Move(offset);
                 this.leftHandPreviousPosition += offset;

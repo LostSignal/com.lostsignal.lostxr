@@ -59,7 +59,7 @@ Transform:
   m_GameObject: {fileID: 364438064}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 16013078}
@@ -1131,6 +1131,11 @@ MonoBehaviour:
   postitionOffset: {x: 0, y: 0.04, z: 0.07}
   rotationOffset: {x: 0.5, y: 0, z: 0, w: 0.8660254}
   debugMode: 3
+  interactors:
+  - {fileID: 1670256627}
+  - {fileID: 429700494}
+  - {fileID: 1319746312}
+  - {fileID: 423731220}
 --- !u!1 &739742158
 GameObject:
   m_ObjectHideFlags: 0
@@ -2053,7 +2058,7 @@ Transform:
   m_GameObject: {fileID: 1670256624}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1980187690}
@@ -3192,6 +3197,11 @@ MonoBehaviour:
   postitionOffset: {x: 0, y: 0.04, z: 0.07}
   rotationOffset: {x: 0.5, y: 0, z: 0, w: 0.8660254}
   debugMode: 3
+  interactors:
+  - {fileID: 364438067}
+  - {fileID: 1879004379}
+  - {fileID: 739742162}
+  - {fileID: 1761329326}
 --- !u!1 &1980187689
 GameObject:
   m_ObjectHideFlags: 0

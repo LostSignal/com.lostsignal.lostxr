@@ -18,11 +18,13 @@ namespace Lost.Haven
         [Space]
         [SerializeField] private InteractionLayerMask interactionLayers = -1;
         [SerializeField] private GameObject customReticle;
+        [SerializeField] private InteractableSelectMode selectMode;
 
         public void Apply(HavenClimbable climb)
         {
             climb.interactionLayers = this.interactionLayers;
             climb.customReticle = this.customReticle;
+            climb.selectMode = this.selectMode;
         }
     }
 }

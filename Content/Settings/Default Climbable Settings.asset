@@ -16,3 +16,4 @@ MonoBehaviour:
     interactionLayers:
       m_Bits: 4294967295
     customReticle: {fileID: 0}
+    selectMode: 0

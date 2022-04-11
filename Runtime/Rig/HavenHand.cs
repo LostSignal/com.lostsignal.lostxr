@@ -8,6 +8,7 @@
 
 namespace Lost.Haven
 {
+    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using Lost.XR;
     using UnityEngine;
@@ -26,8 +27,10 @@ namespace Lost.Haven
         [SerializeField] private Vector3 postitionOffset;
         [SerializeField] private Quaternion rotationOffset;
         [SerializeField] private Mode debugMode;
+        [SerializeField] private XRBaseInteractor[] interactors;
 #pragma warning restore 0649
 
+        private HashSet<int> interactorInstanceIds;
         private float previousTrigger;
         private float previousGrip;
         private Mode currentMode;
@@ -101,6 +104,25 @@ namespace Lost.Haven
         public void Select(IXRSelectInteractable select)
         {
             XRInteractionHelper.XRInteractionManagerInstance.SelectEnter(this.directGrab.Interactor, select);
+        }
+
+        public bool HasInteractor(XRBaseInteractor interactor)
+        {
+            //// TODO [bgish]: Precache these at startup
+            if (this.interactorInstanceIds == null)
+            {
+                this.interactorInstanceIds = new HashSet<int>();
+
+                if (this.interactors?.Length > 0)
+                {
+                    for (int i = 0; i < this.interactors.Length; i++)
+                    {
+                        this.interactorInstanceIds.Add(this.interactors[i].GetInstanceID());
+                    }
+                }
+            }
+
+            return this.interactorInstanceIds.Contains(interactor.GetInstanceID());
         }
 
         private void Awake()
