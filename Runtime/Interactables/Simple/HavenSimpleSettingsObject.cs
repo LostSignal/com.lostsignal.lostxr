@@ -1,9 +1,8 @@
 //-----------------------------------------------------------------------
-// <copyright file="HavenClimbSettingsObject.cs" company="Lost Signal LLC">
+// <copyright file="HavenSimpleSettingsObject.cs" company="Lost Signal LLC">
 //     Copyright (c) Lost Signal LLC. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
-
 
 #if UNITY
 
@@ -11,19 +10,19 @@ namespace Lost.Haven
 {
     using UnityEngine;
 
-    [CreateAssetMenu(menuName = "Lost/Haven/Haven Climb Settings")]
-    public class HavenClimbSettingsObject : ScriptableObject
+    [CreateAssetMenu(menuName = "Lost/Haven/HXR Simple Settings")]
+    public class HavenSimpleSettingsObject : ScriptableObject
     {
 #pragma warning disable 0649
         [ChildrenOnly]
         [Indent(1)]
         [SerializeField]
-        private HavenClimbSettings settings;
+        private HavenSimpleSettings settings;
 #pragma warning restore 0649
 
-        public void Apply(HavenClimbable climb)
+        public void Apply(HavenSimple simple)
         {
-            this.settings.Apply(climb);
+            this.settings.Apply(simple);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Lost.Haven
 {
     using UnityEngine;
 
-    [CreateAssetMenu(menuName = "Lost/Haven/Haven Grabbable Settings")]
+    [CreateAssetMenu(menuName = "Lost/Haven/HXR Grabbable Settings")]
     public class HavenGrabbableSettingsObject : ScriptableObject
     {
 #pragma warning disable 0649

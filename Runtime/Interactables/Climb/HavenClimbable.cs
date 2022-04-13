@@ -18,17 +18,17 @@ namespace Lost.Haven
         private static readonly Dictionary<int, HavenHand> Hands = new Dictionary<int, HavenHand>();
 
 #pragma warning disable 0649
-        [SerializeField] private HavenClimbSettingsObject havenClimbSettings;
+        [SerializeField] private HavenClimbableSettingsObject havenClimbableSettings;
         [SerializeField] private Rigidbody climbRigidbody;
 #pragma warning restore 0649
 
         public void OnAwake()
         {
-            this.AssertNotNull(this.havenClimbSettings, nameof(this.havenClimbSettings));
+            this.AssertNotNull(this.havenClimbableSettings, nameof(this.havenClimbableSettings));
             this.AssertNotNull(this.climbRigidbody, nameof(this.climbRigidbody));
             this.AssertTrue(this.climbRigidbody.isKinematic, nameof(this.climbRigidbody.isKinematic));
 
-            this.havenClimbSettings.Apply(this);
+            this.havenClimbableSettings.Apply(this);
         }
 
         protected override void Awake()
@@ -122,9 +122,9 @@ namespace Lost.Haven
                 EditorUtil.SetDirty(this);
             }
 
-            if (this.havenClimbSettings == null)
+            if (this.havenClimbableSettings == null)
             {
-                this.havenClimbSettings = EditorUtil.GetAssetByGuid<HavenClimbSettingsObject>("bf2e9105aa6b8fa4aaee8519fe305e62");
+                this.havenClimbableSettings = EditorUtil.GetAssetByGuid<HavenClimbableSettingsObject>("c533b0e320be29a468a40f3bad7648b2");
                 EditorUtil.SetDirty(this);
             }
 

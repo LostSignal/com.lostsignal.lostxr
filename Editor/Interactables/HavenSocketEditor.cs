@@ -28,6 +28,7 @@ namespace Lost.Haven
                     this.DrawProperty("m_HoverEntered");
                     this.DrawProperty("m_HoverExited");
                     this.DrawProperty("m_SelectEntered");
+                    this.DrawProperty("m_SelectExited");
                 }
             }
 

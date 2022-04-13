@@ -14,7 +14,7 @@ namespace Lost.Haven
     {
         public override void OnInspectorGUI()
         {
-            this.DrawProperty("havenClimbSettings");
+            this.DrawProperty("havenClimbableSettings");
             this.DrawProperty("climbRigidbody");
             this.DrawProperty("m_Colliders");
 
@@ -25,6 +25,7 @@ namespace Lost.Haven
                     this.DrawProperty("m_HoverEntered");
                     this.DrawProperty("m_HoverExited");
                     this.DrawProperty("m_SelectEntered");
+                    this.DrawProperty("m_SelectExited");
                 }
             }
 

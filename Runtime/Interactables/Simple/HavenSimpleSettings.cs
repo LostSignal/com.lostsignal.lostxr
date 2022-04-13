@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------
-// <copyright file="HavenClimbSettings.cs" company="Lost Signal LLC">
+// <copyright file="HavenSimpleSettings.cs" company="Lost Signal LLC">
 //     Copyright (c) Lost Signal LLC. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -13,18 +13,18 @@ namespace Lost.Haven
     using UnityEngine.XR.Interaction.Toolkit;
 
     [Serializable]
-    public class HavenClimbSettings
+    public class HavenSimpleSettings
     {
         [Space]
         [SerializeField] private InteractionLayerMask interactionLayers = -1;
         [SerializeField] private GameObject customReticle;
         [SerializeField] private InteractableSelectMode selectMode;
 
-        public void Apply(HavenClimbable climb)
+        public void Apply(HavenSimple simple)
         {
-            climb.interactionLayers = this.interactionLayers;
-            climb.customReticle = this.customReticle;
-            climb.selectMode = this.selectMode;
+            simple.interactionLayers = this.interactionLayers;
+            simple.customReticle = this.customReticle;
+            simple.selectMode = this.selectMode;
         }
     }
 }

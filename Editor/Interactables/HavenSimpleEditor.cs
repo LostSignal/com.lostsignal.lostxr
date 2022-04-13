@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------
-// <copyright file="HavenTeleportEditor.cs" company="Lost Signal LLC">
+// <copyright file="HavenSimpleEditor.cs" company="Lost Signal LLC">
 //     Copyright (c) Lost Signal LLC. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -9,24 +9,23 @@ namespace Lost.Haven
     using Lost.EditorGrid;
     using UnityEditor;
 
-    [CustomEditor(typeof(HavenTeleport)), CanEditMultipleObjects]
-    public class HavenTeleportEditor : LostEditor
+    [CustomEditor(typeof(HavenSimple))]
+    public class HavenSimpleEditor : LostEditor
     {
         public override void OnInspectorGUI()
         {
-            this.DrawProperty("m_CustomReticle");
-            this.DrawProperty("type");
-            this.DrawProperty("anchorTransform");
-            this.DrawProperty("matchAnchorOrientation");
+            this.DrawProperty("havenSimpleSettings");
+            this.DrawProperty("disableRayGrab");
             this.DrawProperty("m_Colliders");
 
             using (new FoldoutScope(this.target.GetInstanceID(), "Events", out bool visible))
             {
                 if (visible)
                 {
-                    this.DrawProperty("onHoverStart");
-                    this.DrawProperty("onHoverStop");
-                    this.DrawProperty("onTeleport");
+                    this.DrawProperty("m_HoverEntered");
+                    this.DrawProperty("m_HoverExited");
+                    this.DrawProperty("m_SelectEntered");
+                    this.DrawProperty("m_SelectExited");
                 }
             }
 
