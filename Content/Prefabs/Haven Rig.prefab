@@ -81,8 +81,8 @@ MonoBehaviour:
   m_UpdateTrackingType: 2
   m_EnableInputTracking: 0
   m_EnableInputActions: 0
-  m_ModelPrefab: {fileID: 0}
-  m_ModelParent: {fileID: 0}
+  m_ModelPrefab: {fileID: 1306640934352848695, guid: 8dedcaf0848b64e4c94ecf087ccf867d, type: 3}
+  m_ModelParent: {fileID: 16013078}
   m_Model: {fileID: 0}
   m_AnimateModel: 0
   m_ModelSelectTransition: 
@@ -144,7 +144,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_SelectActionTrigger: 1
-  m_HideControllerOnSelect: 0
+  m_HideControllerOnSelect: 1
   m_AllowHoveredActivate: 0
   m_PlayAudioClipOnSelectEntered: 0
   m_AudioClipForOnSelectEntered: {fileID: 0}
@@ -1187,8 +1187,8 @@ MonoBehaviour:
   m_UpdateTrackingType: 2
   m_EnableInputTracking: 0
   m_EnableInputActions: 0
-  m_ModelPrefab: {fileID: 1306640934352848695, guid: 8dedcaf0848b64e4c94ecf087ccf867d, type: 3}
-  m_ModelParent: {fileID: 450882736}
+  m_ModelPrefab: {fileID: 0}
+  m_ModelParent: {fileID: 0}
   m_Model: {fileID: 0}
   m_AnimateModel: 0
   m_ModelSelectTransition: 
@@ -1603,8 +1603,8 @@ MonoBehaviour:
   m_UpdateTrackingType: 2
   m_EnableInputTracking: 0
   m_EnableInputActions: 0
-  m_ModelPrefab: {fileID: 1306640934352848695, guid: 8dedcaf0848b64e4c94ecf087ccf867d, type: 3}
-  m_ModelParent: {fileID: 1499812065}
+  m_ModelPrefab: {fileID: 0}
+  m_ModelParent: {fileID: 0}
   m_Model: {fileID: 0}
   m_AnimateModel: 0
   m_ModelSelectTransition: 
@@ -2080,8 +2080,8 @@ MonoBehaviour:
   m_UpdateTrackingType: 2
   m_EnableInputTracking: 0
   m_EnableInputActions: 0
-  m_ModelPrefab: {fileID: 0}
-  m_ModelParent: {fileID: 0}
+  m_ModelPrefab: {fileID: 1306640934352848695, guid: 8dedcaf0848b64e4c94ecf087ccf867d, type: 3}
+  m_ModelParent: {fileID: 1980187690}
   m_Model: {fileID: 0}
   m_AnimateModel: 0
   m_ModelSelectTransition: 
@@ -2143,7 +2143,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_SelectActionTrigger: 1
-  m_HideControllerOnSelect: 0
+  m_HideControllerOnSelect: 1
   m_AllowHoveredActivate: 0
   m_PlayAudioClipOnSelectEntered: 0
   m_AudioClipForOnSelectEntered: {fileID: 0}
