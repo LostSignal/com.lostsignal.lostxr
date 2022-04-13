@@ -16,6 +16,7 @@ namespace Lost.Haven
         {
             this.DrawProperty("havenGrabbableSettings");
             this.DrawProperty("isOffsetGrabbable");
+            this.DrawProperty("disableRayGrab");
             this.DrawProperty("m_AttachTransform");
             this.DrawProperty("m_Colliders");
 

@@ -36,6 +36,7 @@ namespace Lost.Haven
         private Mode currentMode;
         private bool disableTeleport;
         private float teleportReleaseTime;
+        private bool isRayGrabDisabled;
 
         public enum Mode
         {
@@ -209,6 +210,18 @@ namespace Lost.Haven
         {
             this.handTransform.localPosition = position + this.postitionOffset;
             this.handTransform.localRotation = rotation * this.rotationOffset;
+
+            // Special case to turn off ray grabbing if direct grabbing is happening
+            if (this.directGrab.HasSelection && this.isRayGrabDisabled == false)
+            {
+                this.isRayGrabDisabled = true;
+                this.rayGrab.DisableGrab();
+            }
+            else if (this.directGrab.HasSelection == false && this.isRayGrabDisabled)
+            {
+                this.isRayGrabDisabled = false;
+                this.rayGrab.EnableGrab();
+            }
 
             // Calculating Grabbing
             float currentGrip = grip;

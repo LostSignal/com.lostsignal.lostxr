@@ -9,6 +9,7 @@
 namespace Lost.Haven
 {
     using Lost.Networking;
+    using System.Runtime.CompilerServices;
     using UnityEngine;
     using UnityEngine.Events;
     using UnityEngine.XR.Interaction.Toolkit;
@@ -19,6 +20,7 @@ namespace Lost.Haven
 #pragma warning disable 0649
         [SerializeField] private HavenGrabbableSettingsObject havenGrabbableSettings;
         [SerializeField] private bool isOffsetGrabbable = true;
+        [SerializeField] private bool disableRayGrab;
 
         [Header("Hover")]
         [SerializeField] private UnityEvent onHoverStart;
@@ -50,12 +52,39 @@ namespace Lost.Haven
 
         public bool IsOffsetGrabbable
         {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get => this.isOffsetGrabbable;
+
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set => this.isOffsetGrabbable = value;
+        }
+
+        public bool DisableRayGrab
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get => this.disableRayGrab;
+
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            set => this.disableRayGrab = value;
+        }
+
+        public override bool IsHoverableBy(IXRHoverInteractor interactor)
+        {
+            if (this.disableRayGrab && interactor is XRRayInteractor)
+            {
+                return false;
+            }
+
+            return base.IsHoverableBy(interactor);
         }
 
         public override bool IsSelectableBy(IXRSelectInteractor interactor)
         {
+            if (this.disableRayGrab && interactor is XRRayInteractor)
+            {
+                return false;
+            }
+
             return base.IsSelectableBy(interactor) &&
                 (this.interactionLayers.value & interactor.interactionLayers.value) != 0;
         }
