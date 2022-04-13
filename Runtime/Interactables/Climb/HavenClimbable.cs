@@ -124,7 +124,7 @@ namespace Lost.Haven
 
             if (this.havenClimbableSettings == null)
             {
-                this.havenClimbableSettings = EditorUtil.GetAssetByGuid<HavenClimbableSettingsObject>("c533b0e320be29a468a40f3bad7648b2");
+                this.havenClimbableSettings = EditorUtil.GetAssetByGuid<HavenClimbableSettingsObject>("bf2e9105aa6b8fa4aaee8519fe305e62");
                 EditorUtil.SetDirty(this);
             }
 
