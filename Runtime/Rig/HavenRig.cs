@@ -143,6 +143,13 @@ namespace Lost.Haven
             }
         }
 
+        public HavenHand GetHand(XRBaseInteractor interactor)
+        {
+            return this.leftHand.HasInteractor(interactor) ? this.leftHand :
+                   this.rightHand.HasInteractor(interactor) ? this.rightHand :
+                   null;
+        }
+
         public void SendHapticImpluse(XRBaseInteractor interactor, float amplitude, float duration)
         {
             int instanceId = interactor.GetInstanceID();
