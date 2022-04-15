@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Default Grabbable Settings
   m_EditorClassIdentifier: 
   settings:
+    interactionLayers:
+      m_Bits: 4294967295
     movementType: 2
     selectMode: 0
     customReticle: {fileID: 0}
@@ -59,6 +61,6 @@ MonoBehaviour:
       m_RotationOrder: 4
     throwVelocityScale: 1.5
     throwAngularVelocityScale: 1
-    retainTransformParent: 1
+    retainTransformParent: 0
     forceGravityOnDetach: 0
     attachEaseInTime: 0.15
