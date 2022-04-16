@@ -15,6 +15,11 @@ namespace Lost.Haven
     {
         public static void Setup(XRBaseInteractable interactable, HavenLayer layer)
         {
+            if (Application.isPlaying)
+            {
+                return;
+            }
+
             // Always make sure the we're not saving a reference to the interaction manager
             if (interactable.interactionManager != null)
             {
