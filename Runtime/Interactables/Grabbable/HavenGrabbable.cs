@@ -44,6 +44,10 @@ namespace Lost.Haven
         private bool isBeingGrabbed;
         private bool isBeingUsed;
 
+        private bool hasInitializedAttachTransformInfo;
+        private Vector3 originalAttachTransformPosition;
+        private Quaternion originalAttachTransformRotation;
+
         public bool IsBeingHovered => this.isBeingHovered;
 
         public bool IsBeingGrabbed => this.isBeingGrabbed;
@@ -119,9 +123,14 @@ namespace Lost.Haven
                 {
                     this.attachTransform = new GameObject("Attach Transform").transform;
                     this.attachTransform.SetParent(this.transform);
-                    this.attachTransform.localPosition = Vector3.zero;
-                    this.attachTransform.localRotation = Quaternion.identity;
-                    this.attachTransform.localScale = Vector3.one;
+                    this.attachTransform.Reset();
+                }
+
+                if (this.hasInitializedAttachTransformInfo == false)
+                {
+                    this.hasInitializedAttachTransformInfo = true;
+                    this.originalAttachTransformPosition = this.attachTransform.localPosition;
+                    this.originalAttachTransformRotation = this.attachTransform.localRotation;
                 }
 
                 var attachTransform = selectEnterEventArgs.interactorObject.GetAttachTransform(this);
@@ -143,6 +152,12 @@ namespace Lost.Haven
 
         protected override void OnSelectExited(SelectExitEventArgs selectExitedEventArgs)
         {
+            if (this.isOffsetGrabbable)
+            {
+                this.attachTransform.localPosition = this.originalAttachTransformPosition;
+                this.attachTransform.localRotation = this.originalAttachTransformRotation;
+            }
+
             if (this.usingNetworking && Time.realtimeSinceStartup - this.awakeTime > 1.0f)
             {
                 this.networkIdentity.ReleaseOwnership();
@@ -153,16 +168,7 @@ namespace Lost.Haven
 
         private void OnValidate()
         {
-            if (Application.isPlaying)
-            {
-                return;
-            }
-
-            if (this.havenGrabbableSettings == null)
-            {
-                this.havenGrabbableSettings = EditorUtil.GetAssetByGuid<HavenGrabbableSettingsObject>("7e6b6732524710d4dadd8d667f3fb00b");
-                EditorUtil.SetDirty(this);
-            }
+            EditorUtil.SetIfNull(this, ref this.havenGrabbableSettings, "7e6b6732524710d4dadd8d667f3fb00b");
 
             HavenInteractableUtil.Setup(this, HavenLayer.Interactable);
         }
