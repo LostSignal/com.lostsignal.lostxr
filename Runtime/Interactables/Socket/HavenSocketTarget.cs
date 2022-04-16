@@ -11,19 +11,20 @@ namespace Lost.Haven
     using System;
     using System.Collections.Generic;
     using UnityEngine;
+    using UnityEngine.Events;
     using UnityEngine.XR.Interaction.Toolkit;
 
     [AddComponentMenu("Haven XR/Socket/HXR Socket Target")]
     [RequireComponent(typeof(XRBaseInteractable))]
-    public class HavenSocketTarget : MonoBehaviour
+    public class HavenSocketTarget : MonoBehaviour, IAwake, IValidate
     {
         private static readonly Dictionary<int, string> SocketTargetMap = new Dictionary<int, string>();
 
 #pragma warning disable 0649
+        [SerializeField] private Rigidbody interactableRigidbody;
         [SerializeField] private XRBaseInteractable interactable;
         [SerializeField] private string socketTargetName;
-        [SerializeField] private bool disableInteractableOnSocketed;
-        [SerializeField] private SelectEnterEvent onSocketedEvent;
+        [SerializeField] private UnityEvent<XRBaseInteractor> onSocketed;
 #pragma warning restore 0649
 
         public static string GetSocketTargetName(XRBaseInteractable interactable)
@@ -36,23 +37,36 @@ namespace Lost.Haven
             return null;
         }
 
-        private void Awake()
+        public void Validate(List<ValidationError> errors)
         {
-            if (this.interactable && string.IsNullOrWhiteSpace(this.socketTargetName) == false)
+            this.AssertNotNull(errors, this.interactable, nameof(this.interactable));
+            this.AssertValidString(errors, this.socketTargetName, nameof(this.socketTargetName));
+        }
+
+        public void OnAwake()
+        {
+            this.interactable.selectEntered.AddListener(this.SelectEntered);
+        }
+
+        public void DisableInteractable()
+        {
+            this.enabled = false;
+            this.interactable.enabled = false;
+
+            if (this.interactableRigidbody != null)
             {
-                this.interactable.selectEntered.AddListener(this.SelectedSwitch);
-            }
-            else
-            {
-                Debug.LogError($"HavenSocketTarget {this.name} has no interactable or socketTargetName and will not work.", this);
+                this.interactableRigidbody.useGravity = false;
+                this.interactableRigidbody.isKinematic = true;
             }
         }
+
+        private void Awake() => ActivationManager.Register(this);
 
         private void OnDestroy()
         {
             if (this.interactable && string.IsNullOrWhiteSpace(this.socketTargetName) == false)
             {
-                this.interactable.selectEntered.RemoveListener(this.SelectedSwitch);
+                this.interactable.selectEntered.RemoveListener(this.SelectEntered);
             }
         }
 
@@ -72,7 +86,13 @@ namespace Lost.Haven
             }
         }
 
-        private void SelectedSwitch(SelectEnterEventArgs selectEnterEventArgs)
+        private void OnValidate()
+        {
+            EditorUtil.SetIfNull(this, ref this.interactable);
+            EditorUtil.SetIfNull(this, ref this.interactableRigidbody);
+        }
+
+        private void SelectEntered(SelectEnterEventArgs selectEnterEventArgs)
         {
             var socketInteractor = selectEnterEventArgs.interactorObject as HavenSocket;
 
@@ -81,14 +101,9 @@ namespace Lost.Haven
                 return;
             }
 
-            if (this.disableInteractableOnSocketed)
-            {
-                this.interactable.enabled = false;
-            }
-
             try
             {
-                this.onSocketedEvent?.Invoke(selectEnterEventArgs);
+                this.onSocketed?.Invoke(selectEnterEventArgs.interactorObject as XRBaseInteractor);
             }
             catch (Exception ex)
             {

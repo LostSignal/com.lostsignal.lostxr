@@ -8,21 +8,35 @@
 
 namespace Lost.Haven
 {
+    using System.Collections.Generic;
     using UnityEngine;
+    using UnityEngine.Events;
     using UnityEngine.XR.Interaction.Toolkit;
 
     [AddComponentMenu("Haven XR/Socket/HXR Socket")]
-    public class HavenSocket : XRSocketInteractor, IAwake
+    public class HavenSocket : XRSocketInteractor, IAwake, IValidate
     {
 #pragma warning disable 0649
         [SerializeField] private HavenSocketSettingsObject havenSocketSettings;
+        [SerializeField] private bool disableInteractorAndInteractableOnSocketed;
         [SerializeField] private bool onlyAllowSpecificSocketTarget;
+        [SerializeField] private UnityEvent<XRBaseInteractable> onSocketed;
 
         [ShowIf("onlyAllowSpecificSocketTarget", true)]
         [SerializeField] private string socketTargetName;
 #pragma warning restore 0649
 
         public string SocketTargetName => this.socketTargetName;
+
+        public void Validate(List<ValidationError> errors)
+        {
+            this.AssertNotNull(errors, this.havenSocketSettings, nameof(this.havenSocketSettings));
+        }
+
+        public void OnAwake()
+        {
+            this.havenSocketSettings.Apply(this);
+        }
 
         public override bool CanHover(IXRHoverInteractable interactable)
         {
@@ -58,12 +72,33 @@ namespace Lost.Haven
             return canSelect;
         }
 
-
-        public void OnAwake()
+        protected override void OnSelectEntered(SelectEnterEventArgs args)
         {
-            this.AssertNotNull(this.havenSocketSettings, nameof(this.havenSocketSettings));
+            base.OnSelectEntered(args);
 
-            this.havenSocketSettings.Apply(this);
+            if (this.onSocketed != null)
+            {
+                this.onSocketed?.Invoke(args.interactableObject as XRBaseInteractable);
+            }
+
+            if (this.disableInteractorAndInteractableOnSocketed)
+            {
+                this.ExecuteDelayed(0.2f, () =>
+                {
+                    this.enabled = false;
+                    this.socketActive = false;
+
+                    var interactable = args.interactableObject as XRBaseInteractable;
+                    var socketTarget = interactable != null ? interactable.GetComponent<HavenSocketTarget>() : null;
+
+                    if (socketTarget != null)
+                    {
+                        var parent = this.attachTransform != null ? this.attachTransform : this.transform;
+                        socketTarget.transform.SetParent(parent);
+                        socketTarget.DisableInteractable();
+                    }
+                });
+            }
         }
 
         protected override void Awake()
@@ -72,21 +107,10 @@ namespace Lost.Haven
             ActivationManager.Register(this);
         }
 
-#if UNITY_EDITOR
         private void OnValidate()
         {
-            if (Application.isPlaying)
-            {
-                return;
-            }
-
-            if (this.havenSocketSettings == null)
-            {
-                this.havenSocketSettings = EditorUtil.GetAssetByGuid<HavenSocketSettingsObject>("c336bbd69f11b7d48aef5ba5aea19c37");
-                EditorUtil.SetDirty(this);
-            }
+            EditorUtil.SetIfNull(this, ref this.havenSocketSettings, "c336bbd69f11b7d48aef5ba5aea19c37");
         }
-#endif
     }
 }
 

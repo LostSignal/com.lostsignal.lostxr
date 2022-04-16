@@ -17,7 +17,7 @@ namespace Lost.Haven
     {
         [Space]
         [SerializeField] private InteractionLayerMask interactionLayers = -1;
-        [SerializeField] private UnityEngine.XR.Interaction.Toolkit.XRBaseInteractable.MovementType movementType;
+        [SerializeField] private XRBaseInteractable.MovementType movementType;
         [SerializeField] private InteractableSelectMode selectMode;
         [SerializeField] private GameObject customReticle;
 

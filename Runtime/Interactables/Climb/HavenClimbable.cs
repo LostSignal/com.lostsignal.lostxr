@@ -13,7 +13,7 @@ namespace Lost.Haven
     using UnityEngine.XR.Interaction.Toolkit;
 
     [AddComponentMenu("Haven XR/Interactables/HXR Climbable")]
-    public class HavenClimbable : XRBaseInteractable, IAwake
+    public class HavenClimbable : XRBaseInteractable, IAwake, IValidate
     {
         private static readonly Dictionary<int, HavenHand> Hands = new Dictionary<int, HavenHand>();
 
@@ -22,12 +22,15 @@ namespace Lost.Haven
         [SerializeField] private Rigidbody climbRigidbody;
 #pragma warning restore 0649
 
+        public void Validate(List<ValidationError> errors)
+        {
+            this.AssertNotNull(errors, this.havenClimbableSettings, nameof(this.havenClimbableSettings));
+            this.AssertNotNull(errors, this.climbRigidbody, nameof(this.climbRigidbody));
+            this.AssertTrue(errors, this.climbRigidbody.isKinematic, nameof(this.climbRigidbody.isKinematic));
+        }
+
         public void OnAwake()
         {
-            this.AssertNotNull(this.havenClimbableSettings, nameof(this.havenClimbableSettings));
-            this.AssertNotNull(this.climbRigidbody, nameof(this.climbRigidbody));
-            this.AssertTrue(this.climbRigidbody.isKinematic, nameof(this.climbRigidbody.isKinematic));
-
             this.havenClimbableSettings.Apply(this);
         }
 
@@ -99,16 +102,8 @@ namespace Lost.Haven
 
         private void OnValidate()
         {
-            if (Application.isPlaying)
-            {
-                return;
-            }
-
-            if (this.climbRigidbody == null)
-            {
-                this.climbRigidbody = this.GetComponent<Rigidbody>();
-                EditorUtil.SetDirty(this);
-            }
+            EditorUtil.SetIfNull(this, ref this.havenClimbableSettings, "bf2e9105aa6b8fa4aaee8519fe305e62");
+            EditorUtil.SetIfNull(this, ref this.climbRigidbody);
 
             if (this.climbRigidbody != null && this.climbRigidbody.isKinematic == false)
             {
@@ -119,12 +114,6 @@ namespace Lost.Haven
             if (this.selectMode != InteractableSelectMode.Single)
             {
                 this.selectMode = InteractableSelectMode.Single;
-                EditorUtil.SetDirty(this);
-            }
-
-            if (this.havenClimbableSettings == null)
-            {
-                this.havenClimbableSettings = EditorUtil.GetAssetByGuid<HavenClimbableSettingsObject>("bf2e9105aa6b8fa4aaee8519fe305e62");
                 EditorUtil.SetDirty(this);
             }
 

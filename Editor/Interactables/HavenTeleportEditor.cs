@@ -6,7 +6,6 @@
 
 namespace Lost.Haven
 {
-    using Lost.EditorGrid;
     using UnityEditor;
 
     [CustomEditor(typeof(HavenTeleport)), CanEditMultipleObjects]
@@ -20,15 +19,22 @@ namespace Lost.Haven
             this.DrawProperty("matchAnchorOrientation");
             this.DrawProperty("m_Colliders");
 
-            using (new FoldoutScope(this.target.GetInstanceID(), "Events", out bool visible))
+            this.Foldout("Events", () =>
             {
-                if (visible)
-                {
-                    this.DrawProperty("onHoverStart");
-                    this.DrawProperty("onHoverStop");
-                    this.DrawProperty("onTeleport");
-                }
-            }
+                this.DrawProperty("onHoverStart");
+                this.DrawProperty("onHoverStop");
+                this.DrawProperty("onTeleport");
+            });
+
+            this.Foldout("Unity XRIT Events", () =>
+            {
+                this.DrawProperty("m_HoverEntered");
+                this.DrawProperty("m_HoverExited");
+                this.DrawProperty("m_SelectEntered");
+                this.DrawProperty("m_SelectExited");
+                this.DrawProperty("m_Activated");
+                this.DrawProperty("m_Deactivated");
+            });
 
             this.serializedObject.ApplyModifiedProperties();
         }

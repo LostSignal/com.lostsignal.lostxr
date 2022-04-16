@@ -6,12 +6,13 @@
 
 namespace Lost.Haven
 {
+    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using UnityEngine;
     using UnityEngine.XR.Interaction.Toolkit;
 
     [AddComponentMenu("Haven XR/Interactables/HXR Simple")]
-    public class HavenSimple : XRSimpleInteractable, IAwake
+    public class HavenSimple : XRSimpleInteractable, IAwake, IValidate
     {
 #pragma warning disable 0649
         [SerializeField] private HavenSimpleSettingsObject havenSimpleSettings;
@@ -27,10 +28,13 @@ namespace Lost.Haven
             set => this.disableRayGrab = value;
         }
 
+        public void Validate(List<ValidationError> errors)
+        {
+            this.AssertNotNull(errors, this.havenSimpleSettings, nameof(this.havenSimpleSettings));
+        }
+
         public void OnAwake()
         {
-            this.AssertNotNull(this.havenSimpleSettings, nameof(this.havenSimpleSettings));
-
             this.havenSimpleSettings.Apply(this);
         }
 
@@ -62,16 +66,7 @@ namespace Lost.Haven
 
         private void OnValidate()
         {
-            if (Application.isPlaying)
-            {
-                return;
-            }
-
-            if (this.havenSimpleSettings == null)
-            {
-                this.havenSimpleSettings = EditorUtil.GetAssetByGuid<HavenSimpleSettingsObject>("c533b0e320be29a468a40f3bad7648b2");
-                EditorUtil.SetDirty(this);
-            }
+            EditorUtil.SetIfNull(this, ref this.havenSimpleSettings, "c533b0e320be29a468a40f3bad7648b2");
 
             HavenInteractableUtil.Setup(this, HavenLayer.Interactable);
         }

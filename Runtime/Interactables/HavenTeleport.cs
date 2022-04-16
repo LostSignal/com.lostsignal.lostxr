@@ -121,11 +121,6 @@ namespace Lost.Haven
 
         private void OnValidate()
         {
-            if (Application.isPlaying)
-            {
-                return;
-            }
-
             HavenInteractableUtil.Setup(this, HavenLayer.Teleport);
 
             if (this.teleportTrigger != TeleportTrigger.OnSelectEntered)
